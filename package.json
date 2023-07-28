@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Monorepo for Gommette, a geosocial mobile game that encourages players to explore their surroundings and connect with others through digital stickers",
   "scripts": {
+    "start": "cd apps/pwa && pnpm start",
     "format": "prettier --write \"**/*.{ts,tsx,md,js,jsx,css}\""
   },
   "keywords": [
