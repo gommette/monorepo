@@ -1,6 +1,6 @@
 ---
 import { pwaInfo } from 'virtual:pwa-info';
-
+import { ViewTransitions } from 'astro:transitions';
 export interface Props {
 	title: string;
 }
@@ -13,6 +13,7 @@ const { title } = Astro.props as Props;
 
 <html lang="en">
   <head>
+    <ViewTransitions />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -28,10 +29,11 @@ const { title } = Astro.props as Props;
     }
     </style>
     { pwaInfo && <Fragment set:html={pwaInfo.webManifest.linkTag} /> }
+    
     <script src="/src/pwa.ts"></script>
   </head>
-  <body>
-    <main>
+  <body transition:animate="slide">
+    <main >
         <article>
             <slot />
         </article>
