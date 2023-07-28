@@ -3,9 +3,16 @@
   "version": "1.0.0",
   "description": "Monorepo for Gommette, a geosocial mobile game that encourages players to explore their surroundings and connect with others through digital stickers",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "format": "prettier --write \"**/*.{ts,tsx,md,js,jsx,css}\""
   },
-  "keywords": ["arweave", "pwa", "geosocial"],
+  "keywords": [
+    "arweave",
+    "pwa",
+    "geosocial"
+  ],
   "author": "Naomi Hauret",
-  "license": "Apache-2.0"
+  "license": "Apache-2.0",
+  "dependencies": {
+    "prettier": "^3.0.0"
+  }
 }
