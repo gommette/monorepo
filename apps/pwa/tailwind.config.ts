@@ -112,6 +112,21 @@ const config: Config = {
           12: '#171717',
         },
 
+        'primary-neutral': {
+          1: '#fdfcfd',
+          2: '#f9f8f9',
+          3: '#f4f2f4',
+          4: '#eeedef',
+          5: '#e9e8ea',
+          6: '#e4e2e4',
+          7: '#dcdbdd',
+          8: '#c8c7cb',
+          9: '#908e96',
+          10: '#86848d',
+          11: '#6f6e77',
+          12: '#1a1523',
+        },
+
         metal: {
           1: '#fdfdfc',
           2: '#fbf9f2',

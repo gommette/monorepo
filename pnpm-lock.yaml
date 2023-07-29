@@ -12,10 +12,12 @@ importers:
     specifiers:
       '@ark-ui/solid': ^0.8.1
       '@rollup/plugin-replace': ^5.0.2
+      '@solid-primitives/i18n': ^1.4.0
       '@solidjs/router': ^0.8.2
       '@tanstack/solid-query': ^4.32.0
       arweavekit: ^1.4.6
       autoprefixer: ^10.4.14
+      class-variance-authority: ^0.7.0
       postcss: ^8.4.24
       solid-devtools: ^0.27.3
       solid-js: ^1.7.6
@@ -26,9 +28,11 @@ importers:
       workbox-window: ^7.0.0
     dependencies:
       '@ark-ui/solid': 0.8.1_solid-js@1.7.8
+      '@solid-primitives/i18n': 1.4.0_solid-js@1.7.8
       '@solidjs/router': 0.8.2_solid-js@1.7.8
       '@tanstack/solid-query': 4.32.0_solid-js@1.7.8
       arweavekit: 1.4.6
+      class-variance-authority: 0.7.0
       solid-js: 1.7.8
     devDependencies:
       '@rollup/plugin-replace': 5.0.2
@@ -2650,6 +2654,14 @@ packages:
       solid-js: 1.7.8
     dev: true
 
+  /@solid-primitives/context/0.2.1_solid-js@1.7.8:
+    resolution: {integrity: sha512-XIIwCOWpRKDersgkR9LNFXaJHIV8QlCFo/tq5bV0cAOZklcwOFcqi2bN+uWgEIQSWGjWXU2kc1H1/TzgYzVDlg==}
+    peerDependencies:
+      solid-js: ^1.6.12
+    dependencies:
+      solid-js: 1.7.8
+    dev: false
+
   /@solid-primitives/cursor/0.0.111_solid-js@1.7.8:
     resolution: {integrity: sha512-P/KqyIdi//VSiE+7uEkbYpO4lubnFBxd40FrNzjZ7iJcxb2woyAsvzKV6pHLIznxRRrAM7bnUsj20e3qbw5TCQ==}
     peerDependencies:
@@ -2676,6 +2688,15 @@ packages:
       '@solid-primitives/utils': 6.2.0_solid-js@1.7.8
       solid-js: 1.7.8
     dev: true
+
+  /@solid-primitives/i18n/1.4.0_solid-js@1.7.8:
+    resolution: {integrity: sha512-jKNa9cl9JFnJdYMh8cQUDb8n89Qc6UTJS9Q0DBjx04du86cv9OOCqnbc+xIKJy+QHV7MfBf7KFDdg3sSGwLstA==}
+    peerDependencies:
+      solid-js: ^1.6.12
+    dependencies:
+      '@solid-primitives/context': 0.2.1_solid-js@1.7.8
+      solid-js: 1.7.8
+    dev: false
 
   /@solid-primitives/keyboard/1.2.3_solid-js@1.7.8:
     resolution: {integrity: sha512-8EBUk1lARIXVhSs9H2t0rclCuyX1y56Kf9J8VVmlPDSh1L+nSIU0wcDGVeVy3HWG6W8pRoRD7kwlQvXhdW2LAQ==}
@@ -4749,6 +4770,12 @@ packages:
       safe-buffer: 5.2.1
     dev: false
 
+  /class-variance-authority/0.7.0:
+    resolution: {integrity: sha512-jFI8IQw4hczaL4ALINxqLEXQbWcNjoSkloa4IaufXCJr6QawJyw7tuRysRsrE8w2p/4gGaxKIt/hX3qz/IbD1A==}
+    dependencies:
+      clsx: 2.0.0
+    dev: false
+
   /classic-level/1.3.0:
     resolution: {integrity: sha512-iwFAJQYtqRTRM0F6L8h4JCt00ZSGdOyqh7yVrhhjrOpFhmBjNlRUey64MCiyo6UmQHMJ+No3c81nujPv+n9yrg==}
     engines: {node: '>=12'}
@@ -4820,6 +4847,11 @@ packages:
   /clone/1.0.4:
     resolution: {integrity: sha512-JQHZ2QMW6l3aH/j6xCqQThY/9OH4D/9ls34cgkUBiEeocRTU04tHfKPBsUK1PqZCUQM7GiA0IIXJSuXHI64Kbg==}
     engines: {node: '>=0.8'}
+    dev: false
+
+  /clsx/2.0.0:
+    resolution: {integrity: sha512-rQ1+kcj+ttHG0MKVGBUXwayCCF1oh39BF5COIpRzuCEv8Mwjv0XucrI2ExNTOn9IlLifGClWQcU9BrZORvtw6Q==}
+    engines: {node: '>=6'}
     dev: false
 
   /clui/0.3.6:

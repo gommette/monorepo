@@ -1,8 +1,9 @@
-import { createContext, useContext, onMount } from 'solid-js'
+import { createContext, useContext, onMount, createEffect } from 'solid-js'
 import { createStore } from 'solid-js/store'
 import { createMutation, type CreateMutationResult } from '@tanstack/solid-query'
 import { Othent } from 'arweavekit/auth'
 import type { UserDetailsReturnProps } from 'arweavekit/dist/types/auth'
+import { useLocation, useNavigate } from '@solidjs/router'
 
 interface Authentication {
   /** Wheter the wallet is connected */
@@ -57,6 +58,9 @@ export const OTHENT_PARAMETERS = {
 
 export function AuthenticationProvider(props) {
   const [storeAuthentication, setStoreAuthentication] = createStore(DEFAULT_STATE)
+
+  const location = useLocation()
+  const navigate = useNavigate()
 
   // Refresh session on mount
   onMount(async () => {
@@ -115,13 +119,14 @@ export function AuthenticationProvider(props) {
     },
     onMutate() {
       setStoreAuthentication(DEFAULT_STATE)
+      navigate('/')
     },
   })
 
-  /**
-   * Query for retrieving current user loyalty information from the smart contract
-   */
-
+  createEffect(() => {
+    // Redirect the user to overworld map view when connected
+    if (location.pathname === '/' && storeAuthentication.connected) navigate('/about')
+  })
   return (
     <AuthenticationContext.Provider
       value={{
