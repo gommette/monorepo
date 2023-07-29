@@ -8,7 +8,9 @@ This repository is a monorepo that contains the source cod of our entry to the [
 
 ## Pre-requisites
 
-- have `node` installed (`>=18.0.0`)
+- have `node` installed (`>=18.0.0`) ;
+- have an Othent app ID (used in our `.env`) ;
+- copy `./apps/pwa/.env.dist` ; replace the values with your own ;
 
 ## Setup
 
