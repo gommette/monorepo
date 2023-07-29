@@ -12,6 +12,7 @@ importers:
     specifiers:
       '@ark-ui/solid': ^0.8.1
       '@rollup/plugin-replace': ^5.0.2
+      '@solid-primitives/geolocation': ^1.4.10
       '@solid-primitives/i18n': ^1.4.0
       '@solidjs/router': ^0.8.2
       '@tanstack/solid-query': ^4.32.0
@@ -30,6 +31,7 @@ importers:
       workbox-window: ^7.0.0
     dependencies:
       '@ark-ui/solid': 0.8.1_solid-js@1.7.8
+      '@solid-primitives/geolocation': 1.4.10_solid-js@1.7.8
       '@solid-primitives/i18n': 1.4.0_solid-js@1.7.8
       '@solidjs/router': 0.8.2_solid-js@1.7.8
       '@tanstack/solid-query': 4.32.0_solid-js@1.7.8
@@ -2733,6 +2735,16 @@ packages:
       solid-js: 1.7.8
     dev: true
 
+  /@solid-primitives/geolocation/1.4.10_solid-js@1.7.8:
+    resolution: {integrity: sha512-/G7oGGB9Y+5zaHbaOkIwkK+pM3CGlNXqGW9PzrTOIQViw7OuXT11FxAMmNKAhRQh7jBCgm8hvXxvRSlunCWTbA==}
+    peerDependencies:
+      solid-js: ^1.6.12
+    dependencies:
+      '@solid-primitives/static-store': 0.0.4_solid-js@1.7.8
+      '@solid-primitives/utils': 6.2.0_solid-js@1.7.8
+      solid-js: 1.7.8
+    dev: false
+
   /@solid-primitives/i18n/1.4.0_solid-js@1.7.8:
     resolution: {integrity: sha512-jKNa9cl9JFnJdYMh8cQUDb8n89Qc6UTJS9Q0DBjx04du86cv9OOCqnbc+xIKJy+QHV7MfBf7KFDdg3sSGwLstA==}
     peerDependencies:
@@ -2818,7 +2830,6 @@ packages:
     dependencies:
       '@solid-primitives/utils': 6.2.0_solid-js@1.7.8
       solid-js: 1.7.8
-    dev: true
 
   /@solid-primitives/styles/0.0.110_solid-js@1.7.8:
     resolution: {integrity: sha512-PSaM1Rl4+zwpOfxil8KlY87UC+R1rQy8b2EiCMjgTWakRK1TjvFM78KY5/ohFg42bp2V/DWRx2QaL/Unjm3HMg==}
@@ -2836,7 +2847,6 @@ packages:
       solid-js: ^1.6.12
     dependencies:
       solid-js: 1.7.8
-    dev: true
 
   /@solidjs/router/0.8.2_solid-js@1.7.8:
     resolution: {integrity: sha512-gUKW+LZqxtX6y/Aw6JKyy4gQ9E7dLqp513oB9pSYJR1HM5c56Pf7eijzyXX+b3WuXig18Cxqah4tMtF0YGu80w==}
