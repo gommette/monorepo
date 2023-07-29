@@ -27,6 +27,8 @@
     "@tanstack/solid-query": "^4.32.0",
     "arweavekit": "^1.4.6",
     "class-variance-authority": "^0.7.0",
-    "solid-js": "^1.7.6"
+    "mapbox-gl": "^2.15.0",
+    "solid-js": "^1.7.6",
+    "solid-map-gl": "^1.9.2"
   }
 }

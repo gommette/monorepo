@@ -9,7 +9,8 @@ This repository is a monorepo that contains the source cod of our entry to the [
 ## Pre-requisites
 
 - have `node` installed (`>=18.0.0`) ;
-- have an Othent app ID (used in our `.env`) ;
+- have an [Othent](https://othent.io) app ID (used in our `.env`) ;
+- have a [Mapbox](https://mapbox.com) access token (used in our `.env`) ;
 - copy `./apps/pwa/.env.dist` ; replace the values with your own ;
 
 ## Setup
@@ -21,13 +22,15 @@ This repository is a monorepo that contains the source cod of our entry to the [
 - Start and run the PWA: `pnpm dev` (or `npm dev`/`yarn dev`) ; this should print something similar to this in your terminal :
 
 ```
+> gommette@1.0.0 start<some-absolute-path>/gommette
+> cd apps/pwa && pnpm dev
 > apps-pwa@0.0.1 dev <some-absolute-path>/gommette/apps/pwa
-> astro dev --host
+> vite dev --host
 
-  🚀  astro  v2.9.5 started in 122ms
+  VITE v4.4.7  ready in 470 ms
 
-  ┃ Local    http://localhost:3000/
-  ┃ Network  http://<your-ip-address>:3000/
+  ➜  Local:   http://localhost:3000/
+  ➜  Network: http://<your-ip-address>:3000/
 ```
 
 You can now access the PWA in your preferred web browser using `http://localhost:3000/` ; to view it on your phone, use `http://<your-ip-address>:3000/`
