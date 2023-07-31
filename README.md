@@ -22,19 +22,43 @@ This repository is a monorepo that contains the source cod of our entry to the [
 - Start and run the PWA: `pnpm dev` (or `npm dev`/`yarn dev`) ; this should print something similar to this in your terminal :
 
 ```
-> gommette@1.0.0 start<some-absolute-path>/gommette
-> cd apps/pwa && pnpm dev
-> apps-pwa@0.0.1 dev <some-absolute-path>/gommette/apps/pwa
-> vite dev --host
+$ pnpm dev
 
-  VITE v4.4.7  ready in 470 ms
+> gommette@1.0.0 dev /some/absolute/path/gommette
+> cd apps/pwa && pnpm dev
+
+
+> gommette-pwa@0.0.0 dev /some/absolute/path/gommette/apps/pwa
+> vite
+
+http://<some-random-string>.tunnelmole.net is forwarding to localhost:3000
+https://<some-random-string>.tunnelmole.net is forwarding to localhost:3000
+▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+█ ▄▄▄▄▄ ██▀▀▄▄▄ ██▄██ █ ▄▄▄▄▄ █
+█ █   █ █▀███ ▀▄▀ ▀ ███ █   █ █
+█ █▄▄▄█ █▄▄█▀▀▄▀█▄▀▀▄▀█ █▄▄▄█ █
+█▄▄▄▄▄▄▄█▄█ ▀▄█▄▀ █▄█ █▄▄▄▄▄▄▄█
+█▄ ▀▀▀▄▄ █ █▄▀  ▀█   ▀▀█▀ ▄▀▀██
+██▄  ▀▄▄ ▀▀▄█▀█ ▄ ███▄▄▀  ▀████
+█ ▄▄▄█▄▄▀▄▄█▄▄▀█ ▀█▄▀█▀ █▀██▀ █
+█▄▄ ▄▀▄▄▀▄█▀ ▄▄▄▄█▄██▀▄▄  ▄ █▀█
+█ ██▄▀▀▄█ █▀▄  ▄  ▄▄ ▄▄▀▀▀▄ ▀▀█
+█ ▄▀█▄▀▄▄▄  ▄▄▄█  ▄█▄▀▀█▄▄▄██▄█
+█▄██▄██▄▄▀▀▀▀█▄ ▀▀  ▄ ▄▄▄ ▀▄▄▄█
+█ ▄▄▄▄▄ █ ▄▄███ ▄███▄ █▄█ ▄▄█▀█
+█ █   █ ██   ▄▀▄ ██▄▄▄ ▄ ▄ ▀█▀█
+█ █▄▄▄█ █▀▄█▀▄▄ ▄██▄▀█▄▄ ▄▄ ▄▀█
+█▄▄▄▄▄▄▄█▄▄▄▄▄▄▄▄▄▄▄▄███▄▄▄▄███
+
+  VITE v4.4.7  ready in 1579 ms
 
   ➜  Local:   http://localhost:3000/
-  ➜  Network: http://<your-ip-address>:3000/
+  ➜  Network: http://<your-local-ip>:3000/
+  ➜  press h to show help
 ```
 
-You can now access the PWA in your preferred web browser using `http://localhost:3000/` ; to view it on your phone, use `http://<your-ip-address>:3000/`
+You can now access the PWA in your preferred web browser using `http://localhost:3000/` ; to view it on your phone, simply flash the QRCode.
 
-Your browser should also offer you to install the app on your machine
+Your browser should also offer you to install the app on your machine.
 
 - Format code: `pnpm format` (or `npm format`/`yarn format`)

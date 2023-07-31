@@ -49,3 +49,8 @@ yarn-error.log*
 # astro
 .astro
 dev-dist/
+
+
+*.key
+*.csr
+*.crt

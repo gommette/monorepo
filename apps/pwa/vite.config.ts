@@ -2,14 +2,23 @@ import { defineConfig } from 'vite'
 import solidPlugin from 'vite-plugin-solid'
 import { VitePWA, type ManifestOptions, type VitePWAOptions } from 'vite-plugin-pwa'
 import replace from '@rollup/plugin-replace'
+import { tunnelmole } from 'tunnelmole'
+import qrcode from 'qrcode-terminal'
+
+const hostPort = 3000
+const hostUrl = await tunnelmole({
+  port: hostPort,
+})
+
+qrcode.generate(hostUrl, { small: true })
 
 const pwaOptions: Partial<VitePWAOptions> = {
   mode: 'development',
   base: '/',
   includeAssets: ['favicon.svg'],
   manifest: {
-    name: 'PWA Router',
-    short_name: 'PWA Router',
+    name: 'Gommette',
+    short_name: 'Gommette',
     theme_color: '#ffffff',
     icons: [
       {
@@ -65,8 +74,13 @@ export default defineConfig({
     sourcemap: process.env.SOURCE_MAP === 'true',
     target: 'esnext',
   },
+  preview: {
+    host: hostUrl,
+  },
+  optimizeDeps: { include: ['mapbox-gl'] },
   server: {
-    port: 3000,
+    port: hostPort,
+    host: true,
   },
   plugins: [
     /* 
