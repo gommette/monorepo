@@ -125,7 +125,7 @@ export function AuthenticationProvider(props) {
 
   createEffect(() => {
     // Redirect the user to overworld map view when connected
-    if (location.pathname === '/' && storeAuthentication.connected) navigate('/about')
+    if (location.pathname === '/' && storeAuthentication.connected) navigate('/app')
   })
   return (
     <AuthenticationContext.Provider

@@ -31,3 +31,25 @@
   font-display: swap;
   src: url('/AtkinsonHyperlegible-BoldItalic.woff2') format('woff2');
 }
+
+.mapboxgl-user-location-accuracy-circle.mapboxgl-marker.mapboxgl-marker-anchor-center {
+  background-color: transparent !important;
+}
+
+.mapboxgl-ctrl-top-right {
+  @apply pt-14 px-2;
+}
+
+[data-scope='dialog'][data-part='backdrop'] {
+  @apply animate-backdropIn;
+}
+[data-scope='dialog'][data-part='backdrop'][data-state='exit'] {
+  @apply animate-backdropOut;
+}
+
+[data-scope='dialog'][data-part='content'] {
+  @apply animate-slideIn;
+}
+[data-scope='dialog'][data-part='content'][data-state='exit'] {
+  @apply animate-slideOut;
+}

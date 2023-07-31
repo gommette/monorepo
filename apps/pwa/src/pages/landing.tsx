@@ -1,5 +1,9 @@
-import Landing from '../screens/Landing'
+import { Landing } from '../screens'
 
 export default function Home() {
-  return <Landing />
+  return (
+    <div class="min-h-[100dvh] flex flex-col">
+      <Landing />
+    </div>
+  )
 }
