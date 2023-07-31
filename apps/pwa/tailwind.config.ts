@@ -53,6 +53,41 @@ const config: Config = {
       '9xl': clamp(10),
     },
     extend: {
+      keyframes: {
+        fadeIn: {
+          '0%': { opacity: '0', scale: '0.8' },
+          '100%': { opacity: '1', scale: '1' },
+        },
+        fadeOut: {
+          '0%': { opacity: '1', scale: '1' },
+          '100%': { opacity: '0', scale: '0.8' },
+        },
+        backdropIn: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '0.7' },
+        },
+        backdropOut: {
+          '0%': { opacity: '0.7' },
+          '100%': { opacity: '0' },
+        },
+        slideIn: {
+          '0%': { opacity: '0', transform: 'translateY(64px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        slideOut: {
+          '0%': { opacity: '1', transform: 'translateY(0)' },
+          '100%': { opacity: '0', transform: 'translateY(64px)' },
+        },
+      },
+
+      animation: {
+        fadeIn: 'fadeIn 0.25s ease-out forwards',
+        fadeOut: 'fadeOut 0.2s ease-in forwards',
+        slideIn: 'slideIn 0.25s ease-out forwards',
+        slideOut: 'slideOut 0.2s ease-in forwards',
+        backdropIn: 'backdropIn 0.25s ease-out forwards',
+        backdropOut: 'backdropOut 0.2s ease-in forwards',
+      },
       colors: {
         primary: {
           1: '#fffcfe',
