@@ -1,5 +1,7 @@
-import { cva } from 'class-variance-authority'
-import type { VariantProps } from 'class-variance-authority'
+import { cva, type VariantProps } from 'class-variance-authority'
+import { RiSystemLoaderFill } from 'solid-icons/ri'
+import { splitProps, Show, type JSX } from 'solid-js'
+import { Transition } from 'solid-transition-group'
 
 // CTA looking element (like button and links)
 export const callToAction = cva(
@@ -55,8 +57,6 @@ export const callToAction = cva(
 
 export type SystemUiCTAProps = VariantProps<typeof callToAction>
 
-import { splitProps, type JSX } from 'solid-js'
-
 export interface ButtonProps extends SystemUiCTAProps, JSX.ButtonHTMLAttributes<HTMLButtonElement> {
   isLoading?: boolean
 }
@@ -73,14 +73,17 @@ export const Button = (props: ButtonProps) => {
       aria-disabled={buttonProps.disabled || local.isLoading === true}
       {...buttonProps}
     >
-      {local.isLoading && (
-        <span
-          classList={{
-            'mie-1ex': local?.class?.includes('rounded-full'),
-          }}
-          class="animate-spin"
-        />
-      )}
+      <Transition enterActiveClass="animate-fadeIn" exitActiveClass="animate-fadeOut">
+        <Show when={local.isLoading === true}>
+          <RiSystemLoaderFill
+            class="text-[1.25em] animate-spin"
+            classList={{
+              'me-[1ex]': !local?.class?.includes('rounded-full'),
+            }}
+          />
+        </Show>
+      </Transition>
+
       {local.children}
     </button>
   )
