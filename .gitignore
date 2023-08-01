@@ -54,3 +54,10 @@ dev-dist/
 *.key
 *.csr
 *.crt
+
+.secrets
+
+.yalc
+yalc.lock
+
+warp

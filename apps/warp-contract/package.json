@@ -5,10 +5,12 @@
   "scripts": {
     "clean": "rimraf ./dist",
     "build-ts": "node build.js",
-    "build": "yarn run clean && yarn run build-ts"
+    "build": "pnpm run clean && pnpm run build-ts",
+    "deploy:mainnet": "pnpm ts-node src/tools/deploy-contract.ts",
+    "deploy:testnet": "pnpm ts-node src/tools/deploy-testnet-contract.ts"
   },
   "engines": {
-    "node": ">=16.5"
+    "node": ">=18"
   },
   "devDependencies": {
     "@babel/preset-typescript": "^7.22.5",
