@@ -1,1 +1,8 @@
-export const initialState = {}
+export const initialState = {
+  players: {},
+  stickerBoards: {},
+  overworldMap: {
+    current: {},
+    history: [],
+  },
+}

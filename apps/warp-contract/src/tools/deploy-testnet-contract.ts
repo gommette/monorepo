@@ -2,7 +2,6 @@ import fs from 'fs'
 import path from 'path'
 import { WarpFactory } from 'warp-contracts'
 import { initialState } from './initialState'
-
 ;(async () => {
   const warp = WarpFactory.forTestnet()
   let wallet: any
