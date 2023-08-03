@@ -29,10 +29,10 @@ import type {
   PinStickerAction,
   PinStickerFunction,
 } from '../actions'
-import { MappingIdStickerBoard, OverworldMap, Player, StickerBoard } from '@gommette/types'
+import { MappingIdPlayer, MappingIdStickerBoard, OverworldMap, StickerBoard } from '@gommette/types'
 
 export interface GommetteState {
-  players: Player
+  players: MappingIdPlayer
   stickerBoards: MappingIdStickerBoard
   overworldMap: OverworldMap
 }

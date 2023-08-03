@@ -14,7 +14,7 @@ export type GetOverworldMapHistoryForLocationResult = {
 }
 
 /**
- * Get current state of the overworld map
+ * Get the history (pinned stickers) of a given geolocation on the overworld map
  */
 export async function getOverworldMapHistoryForLocation(
   state: GommetteState,

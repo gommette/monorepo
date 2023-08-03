@@ -1,11 +1,15 @@
 import { getUnixTime } from 'date-fns'
+import { GommetteState } from '../contracts/types'
 
-export const initialStateEmpty = {
+export const initialStateEmpty: GommetteState = {
   players: {},
   stickerBoards: {},
   overworldMap: {
     current: {},
-    history: [],
+    history: {
+      time: {},
+      location: {},
+    },
   },
 }
 

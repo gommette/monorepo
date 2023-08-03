@@ -13,8 +13,9 @@ export type GetOverworldMapAtTimestampResult = {
   overworldMap: MappingCoordinatesSticker
 }
 
+
 /**
- * Get current state of the overworld map at timestamp x
+ * Get the history (pinned stickers) of the overworld map at a given timestamp
  */
 export async function getOverworldMapAtTimestamp(
   state: GommetteState,
