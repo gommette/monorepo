@@ -3,28 +3,31 @@ import type {
   ClaimDailyDropFunction,
   CreateBoardAction,
   CreateBoardFunction,
-  GetOverworldMapAtTimestampAction,
-  GetOverworldMapAtTimestampFunction,
+  GetStickerBoardByIdAction,
+  GetStickerBoardByIdFunction,
+  GetStickerBoardByIdResult,
   GetOverworldMapAction,
   GetOverworldMapFunction,
   GetOverworldMapResult,
+  GetOverworldMapAtTimestampAction,
+  GetOverworldMapAtTimestampFunction,
+  GetOverworldMapAtTimestampResult,
+  GetOverworldMapHistoryForLocationAction,
+  GetOverworldMapHistoryForLocationFunction,
+  GetOverworldMapHistoryForLocationResult,
+  GetPlayerInventoryAction,
   GetPlayerInventoryFunction,
-  GetStickerBoardByIdAction,
-  GetStickerBoardByIdFunction,
+  GetPlayerInventoryResult,
   GetStickerBoardsAction,
   GetStickerBoardsFunction,
   GetStickerBoardsResult,
   LoadGameAction,
   LoadGameFunction,
   LoadGameResult,
-  GetPlayerInventoryResult,
-  GetOverworldMapAtTimestampResult,
-  GetStickerBoardByIdResult,
   PickStickerFunction,
-  PinStickerFunction,
   PickStickerAction,
   PinStickerAction,
-  GetPlayerInventoryAction,
+  PinStickerFunction,
 } from '../actions'
 import { MappingIdStickerBoard, OverworldMap, Player, StickerBoard } from '@gommette/types'
 
@@ -35,22 +38,23 @@ export interface GommetteState {
 }
 
 export type GommetteFunction =
-  | LoadGameFunction
+  | ClaimDailyDropFunction
+  | CreateBoardFunction
+  | GetOverworldMapFunction
+  | GetOverworldMapAtTimestampFunction
+  | GetOverworldMapHistoryForLocationFunction
   | GetPlayerInventoryFunction
   | GetStickerBoardByIdFunction
   | GetStickerBoardsFunction
-  | GetOverworldMapFunction
-  | GetOverworldMapAtTimestampFunction
-  | CreateBoardFunction
-  | GetPlayerInventoryFunction
-  | ClaimDailyDropFunction
-  | PinStickerFunction
+  | LoadGameFunction
   | PickStickerFunction
+  | PinStickerFunction
 
 export type GommetteResult =
   | GommetteState
   | GetStickerBoardByIdResult
   | GetStickerBoardsResult
+  | GetOverworldMapHistoryForLocationResult
   | GetOverworldMapAtTimestampResult
   | GetOverworldMapResult
   | GetPlayerInventoryResult
@@ -61,6 +65,7 @@ export type GommetteAction =
   | ClaimDailyDropAction
   | CreateBoardAction
   | GetOverworldMapAction
+  | GetOverworldMapHistoryForLocationAction
   | GetOverworldMapAtTimestampAction
   | GetPlayerInventoryAction
   | GetStickerBoardByIdAction

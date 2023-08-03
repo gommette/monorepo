@@ -1,4 +1,5 @@
 export * from './getOverworldMap'
+export * from './getOverworldMapHistoryForLocation'
 export * from './getOverworldMapStateAtTimestamp'
 export * from './getPlayerInventory'
 export * from './getStickerBoardById'

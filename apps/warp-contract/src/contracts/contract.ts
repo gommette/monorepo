@@ -8,6 +8,8 @@ import type {
   ClaimDailyDropAction,
   PinStickerAction,
   PickStickerAction,
+  GetOverworldMapAtTimestampAction,
+  GetOverworldMapHistoryForLocationAction,
 } from './actions'
 import {
   createStickerBoard,
@@ -19,6 +21,8 @@ import {
   claimDailyDrop,
   pinSticker,
   pickSticker,
+  getOverworldMapAtTimestamp,
+  getOverworldMapHistoryForLocation,
 } from './actions'
 import type { ContractResult, GommetteState, GommetteAction } from './types/types'
 
@@ -47,6 +51,14 @@ export async function handle(state: GommetteState, action: GommetteAction): Prom
       return await getOverworldMap(state, action as GetOverworldMapAction)
       break
 
+    case 'getOverworldMapAtTimestamp':
+      return await getOverworldMapAtTimestamp(state, action as GetOverworldMapAtTimestampAction)
+      break
+
+    case 'getOverworldMapHistoryForLocation':
+      return await getOverworldMapHistoryForLocation(state, action as GetOverworldMapHistoryForLocationAction)
+      break
+
     case 'getPlayerInventory':
       return await getPlayerInventory(state, action as GetPlayerInventoryAction)
       break
@@ -61,10 +73,9 @@ export async function handle(state: GommetteState, action: GommetteAction): Prom
 
     case 'pickSticker':
       return await pickSticker(state, action as PickStickerAction)
-
       break
 
     default:
-      throw new ContractError(`No function supplied or function not recognised: "${input.function}"`)
+      throw new ContractError('No function supplied or function not recognised: ', action.input.function)
   }
 }
