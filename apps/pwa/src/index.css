@@ -40,16 +40,21 @@
   @apply pt-14 px-2;
 }
 
-[data-scope='dialog'][data-part='backdrop'] {
+/* The following allows CSS-only animations for Ark UI dialogs */
+/* Ark Solid doesn't support [data-state] yet so we can't use it for now and have to rely on solid transitions */
+/* once it's implemented though, remove this comment and uncomment the following block */
+/*
+[data-scope='dialog'][data-part='backdrop'][data-state='enter'] {
   @apply animate-backdropIn;
 }
 [data-scope='dialog'][data-part='backdrop'][data-state='exit'] {
   @apply animate-backdropOut;
 }
 
-[data-scope='dialog'][data-part='content'] {
+[data-scope='dialog'][data-part='content'][data-state='enter'] {
   @apply animate-slideIn;
 }
 [data-scope='dialog'][data-part='content'][data-state='exit'] {
   @apply animate-slideOut;
 }
+*/

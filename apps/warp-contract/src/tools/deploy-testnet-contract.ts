@@ -1,7 +1,7 @@
 import fs from 'fs'
 import path from 'path'
 import { WarpFactory } from 'warp-contracts'
-import { initialState } from './initialState'
+import { initialStateEmpty } from './initialState'
 ;(async () => {
   const warp = WarpFactory.forTestnet()
   let wallet: any
@@ -19,7 +19,7 @@ import { initialState } from './initialState'
   console.log('Deployment started')
   const { contractTxId } = await warp.deploy({
     wallet,
-    initState: JSON.stringify(initialState),
+    initState: JSON.stringify(initialStateEmpty),
     src: contractSrc,
   })
   console.log(

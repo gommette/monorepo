@@ -21,6 +21,7 @@ importers:
       arweavekit: ^1.4.6
       autoprefixer: ^10.4.14
       class-variance-authority: ^0.7.0
+      date-fns: ^2.30.0
       mapbox-gl: ^2.15.0
       postcss: ^8.4.24
       qrcode-terminal: ^0.12.0
@@ -46,6 +47,7 @@ importers:
       '@tanstack/solid-query': 4.32.0_solid-js@1.7.8
       arweavekit: 1.4.6
       class-variance-authority: 0.7.0
+      date-fns: 2.30.0
       mapbox-gl: 2.15.0
       solid-icons: 1.0.11_solid-js@1.7.8
       solid-js: 1.7.8
@@ -68,10 +70,12 @@ importers:
   apps/warp-contract:
     specifiers:
       '@babel/preset-typescript': ^7.22.5
+      '@gommette/types': workspace:*
       '@types/node': 20.4.5
       arlocal: ^1.1.61
       arweave: ^1.14.4
       copyfiles: ^2.4.1
+      date-fns: ^2.30.0
       esbuild: 0.18.17
       replace-in-file: ^7.0.1
       rimraf: ^5.0.1
@@ -79,8 +83,11 @@ importers:
       typescript: ^5.1.6
       warp-contracts: 1.4.14
       yargs: 17.7.2
+    dependencies:
+      date-fns: 2.30.0
     devDependencies:
       '@babel/preset-typescript': 7.22.5
+      '@gommette/types': link:../../packages/types
       '@types/node': 20.4.5
       arlocal: 1.1.61_typescript@5.1.6
       arweave: 1.14.4
@@ -92,6 +99,9 @@ importers:
       typescript: 5.1.6
       warp-contracts: 1.4.14
       yargs: 17.7.2
+
+  packages/types:
+    specifiers: {}
 
 packages:
 
@@ -5537,6 +5547,13 @@ packages:
     dependencies:
       es5-ext: 0.10.62
       type: 1.2.0
+
+  /date-fns/2.30.0:
+    resolution: {integrity: sha512-fnULvOpxnC5/Vg3NCiWelDsLiUc9bRwAPs/+LfTLNvetFCtCTN+yQz15C/fs4AwX1R9K5GLtLfn8QW+dWisaAw==}
+    engines: {node: '>=0.11'}
+    dependencies:
+      '@babel/runtime': 7.22.6
+    dev: false
 
   /debug/4.3.2:
     resolution: {integrity: sha512-mOp8wKcvj7XxC78zLgw/ZA+6TSgkoE2C/ienthhRD298T7UNwAg9diBpLRxC0mOezLl4B0xV7M0cCO6P/O0Xhw==}

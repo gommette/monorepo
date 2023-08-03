@@ -1,34 +1,24 @@
-import { getUnixTime } from 'date-fns'
-
-export const initialStateEmpty = {
-  players: {},
-  stickerBoards: {},
-  overworldMap: {
-    current: {},
-    history: [],
-  },
-}
-
-export const initialStateWithBoards = {
+import { getUnixTime, addDays, subDays } from 'date-fns'
+export const initialState = {
   players: {},
   stickerBoards: {
     gen_smiley: {
       name: 'smiley face',
-      uri: 'https://www.svgrepo.com/show/404817/beaming-face-with-smiling-eyes.svg',
+      uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Twemoji_1f600.svg/1200px-Twemoji_1f600.svg.png',
       totalQuantity: 1000,
       availableQuantity: 1000,
       createdAt: getUnixTime(new Date()),
     },
     gen_angry: {
       name: 'angry face',
-      uri: 'https://www.svgrepo.com/show/404720/angry-face.svg',
+      uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Twemoji_1f600.svg/1200px-Twemoji_1f600.svg.png',
       totalQuantity: 1000,
       availableQuantity: 1000,
       createdAt: getUnixTime(new Date()),
     },
     gen_alien: {
       name: 'alien',
-      uri: 'https://www.svgrepo.com/show/404711/alien.svg',
+      uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Twemoji_1f600.svg/1200px-Twemoji_1f600.svg.png',
       totalQuantity: 350,
       availableQuantity: 350,
       createdAt: getUnixTime(new Date()),
@@ -36,7 +26,7 @@ export const initialStateWithBoards = {
 
     gen_camera: {
       name: 'camera',
-      uri: 'https://www.svgrepo.com/show/404919/camera-with-flash.svg',
+      uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Twemoji_1f600.svg/1200px-Twemoji_1f600.svg.png',
       totalQuantity: 500,
       availableQuantity: 500,
       createdAt: getUnixTime(new Date()),
@@ -44,42 +34,42 @@ export const initialStateWithBoards = {
 
     gen_clapping: {
       name: 'clapping',
-      uri: 'https://www.svgrepo.com/show/404975/clapping-hands.svg',
+      uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Twemoji_1f600.svg/1200px-Twemoji_1f600.svg.png',
       totalQuantity: 1000,
       availableQuantity: 1000,
       createdAt: getUnixTime(new Date()),
     },
     gen_beer: {
       name: 'beer',
-      uri: 'https://www.svgrepo.com/show/404982/clinking-beer-mugs.svg',
+      uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Twemoji_1f600.svg/1200px-Twemoji_1f600.svg.png',
       totalQuantity: 300,
       availableQuantity: 300,
       createdAt: getUnixTime(new Date()),
     },
     gen_confused: {
       name: 'confused',
-      uri: 'https://www.svgrepo.com/show/405013/confused-face.svg',
+      uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Twemoji_1f600.svg/1200px-Twemoji_1f600.svg.png',
       totalQuantity: 700,
       availableQuantity: 700,
       createdAt: getUnixTime(new Date()),
     },
     gen_cool: {
       name: 'cool',
-      uri: 'https://www.svgrepo.com/show/405031/cool-button.svg',
+      uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Twemoji_1f600.svg/1200px-Twemoji_1f600.svg.png',
       totalQuantity: 100,
       availableQuantity: 100,
       createdAt: getUnixTime(new Date()),
     },
     gen_crying: {
       name: 'crying',
-      uri: 'https://www.svgrepo.com/show/405163/crying-face.svg',
+      uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Twemoji_1f600.svg/1200px-Twemoji_1f600.svg.png',
       totalQuantity: 800,
       availableQuantity: 800,
       createdAt: getUnixTime(new Date()),
     },
     gen_fire: {
       name: 'fire',
-      uri: 'https://www.svgrepo.com/show/405378/fire.svg',
+      uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Twemoji_1f600.svg/1200px-Twemoji_1f600.svg.png',
       totalQuantity: 1200,
       availableQuantity: 1200,
       createdAt: getUnixTime(new Date()),
@@ -87,7 +77,7 @@ export const initialStateWithBoards = {
   },
   overworldMap: {
     current: {
-      '32.99727,45.95037': {
+      '17.110918,48.146445': {
         id: '123',
         idStickerBoard: 'gen_fire',
         pickupConditions: {
@@ -95,9 +85,9 @@ export const initialStateWithBoards = {
         },
         message: {
           author: 'xyz',
-          text: 'hello world',
-          coordinates: [32.99727, 45.95037],
-          createdAt: getUnixTime(new Date()),
+          text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ac gravida massa. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae',
+          coordinates: [17.110918, 48.146445],
+          createdAt: getUnixTime(subDays(new Date(), 9)),
         },
       },
       '47.19727,25.35027': {
@@ -110,7 +100,7 @@ export const initialStateWithBoards = {
           author: 'abc',
           text: 'sup everyone ? this is a test',
           coordinates: [47.19727, 25.35027],
-          createdAt: getUnixTime(new Date()),
+          createdAt: getUnixTime(subDays(new Date(), 3)),
         },
       },
     },
@@ -124,8 +114,8 @@ export const initialStateWithBoards = {
         message: {
           author: 'xyz',
           text: 'hello world',
-          coordinates: [32.99727, 45.95037],
-          createdAt: getUnixTime(new Date()),
+          coordinates: [17.110918, 48.146445],
+          createdAt: getUnixTime(subDays(new Date(), 9)),
         },
       },
       {
@@ -138,7 +128,7 @@ export const initialStateWithBoards = {
           author: 'abc',
           text: 'sup everyone ? this is a test',
           coordinates: [47.19727, 25.35027],
-          createdAt: getUnixTime(new Date()),
+          createdAt: getUnixTime(subDays(new Date(), 3)),
         },
       },
     ],
