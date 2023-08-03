@@ -68,7 +68,9 @@ export async function pickSticker(
     let pinned = 0
     while (pinned < requiredAmount) {
       const currentTimestamp = getUnixTime(new Date())
-      let stickerToPinIndex = state.players[caller].inventory.findIndex((sticker: Sticker) => sticker.idStickerBoard === idBoard)
+      let stickerToPinIndex = state.players[caller].inventory.findIndex(
+        (sticker: Sticker) => sticker.idStickerBoard === idBoard,
+      )
       let stickerToPin: Sticker = player.inventory[stickerToPinIndex]
       stickerToPin.message = {
         author: caller,

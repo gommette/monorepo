@@ -13,7 +13,6 @@ export type GetOverworldMapAtTimestampResult = {
   overworldMap: MappingCoordinatesSticker
 }
 
-
 /**
  * Get the history (pinned stickers) of the overworld map at a given timestamp
  */
