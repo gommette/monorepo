@@ -13,6 +13,11 @@ This repository is a monorepo that contains the source cod of our entry to the [
 - have a [Mapbox](https://mapbox.com) access token (used in our `.env`) ;
 - copy `./apps/pwa/.env.dist` ; replace the values with your own ;
 
+
+
+## About assets
+All svg and vector based used were found on [SVGRepo.com](https://www.svgrepo.com/), which offers over 500k free svg icons ;
+The assets used were uploaded to Arweave ; the latest manifest ID is `TmxMV7ncy72eNFFoUaS1hlBMdii127hgVCxpgjEjAlo`.
 ## Setup
 
 - Once you cloned this repository, install dependencies with `pnpm install` (or `npm install`/`yarn install`) ;

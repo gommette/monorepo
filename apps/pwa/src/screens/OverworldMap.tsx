@@ -6,11 +6,12 @@ import { For, Show, createEffect, createSignal } from 'solid-js'
 import type { Accessor, Setter, Component, Resource } from 'solid-js'
 import { RiCommunicationEmojiStickerFill } from 'solid-icons/ri'
 import { Loader, Dialog as DialogDrawerBody, Button, callToAction } from '../components'
-import { initialState } from '../initialState'
 import { Dialog, DialogTitle, DialogTrigger } from '@ark-ui/solid'
 import { Portal } from 'solid-js/web'
 import { useDictionary } from '../features'
+import { resolveUri } from '../helpers'
 
+const appState = {}
 const dictionary = {
   en: {
     callToAction_PickPinnedSticker_label: 'Pick up',
@@ -41,9 +42,6 @@ export const OverworldMap: Component = () => {
 
   return (
     <>
-      <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=My Event&details=Event description text&dates=20220305T103000/20220305T184500&location=New York City">
-        Add to Google Calendar
-      </a>
       <Show
         fallback={
           <div class="flex items-center justify-center bg-complementary-2">
@@ -110,27 +108,12 @@ const Map = (props: MapProps) => {
             props.setViewport(evt)
           }}
         >
-          <Marker
-            lngLat={[14.0225, 45.68444]}
-            options={{
-              element: (
-                <button
-                  onClick={() => {
-                    const sticker = initialState.overworldMap.current[Object.keys(initialState.overworldMap.current)[0]]
-                    setViewingSticker(sticker)
-                    refDialogPinnedStickerDetails.click()
-                  }}
-                >
-                  <img class="w-5" src={initialState.stickerBoards.gen_camera.uri} />
-                </button>
-              ),
-            }}
-          ></Marker>
 
-          <For each={Object.keys(initialState.overworldMap.current)}>
+          <For each={Object.keys(appState?.overworldMap?.current)}>
             {(coordinates) => {
-              const sticker = initialState.overworldMap.current[coordinates]
-              const uriSticker = initialState.stickerBoards[sticker.idStickerBoard].uri
+              const sticker = appState?.overworldMap.current[coordinates]
+              const uriSticker = resolveUri(appState?.stickerBoards[sticker.idStickerBoard].uri)
+              
               return (
                 <Marker
                   lngLat={coordinates.split(',')}
@@ -176,14 +159,14 @@ const Map = (props: MapProps) => {
                 <div class="w-full pt-6">
                   <div class="flex items-center gap-3 flex-col-reverse">
                     <DialogTitle class="text-neutral-11 text-xs">
-                      {viewingSticker()?.id} - {initialState.stickerBoards[viewingSticker()?.idStickerBoard].name}
+                      {viewingSticker()?.id} - {appState?.stickerBoards[viewingSticker()?.idStickerBoard].name}
                     </DialogTitle>
                     <div class="px-6">
                       <section>
                         <img
-                          alt={initialState.stickerBoards[viewingSticker()?.idStickerBoard].name}
+                          alt={appState?.stickerBoards[viewingSticker()?.idStickerBoard].name}
                           class="animate-revolve w-24"
-                          src={initialState.stickerBoards[viewingSticker()?.idStickerBoard].uri}
+                          src={resolveUri(appState?.stickerBoards[viewingSticker()?.idStickerBoard].uri)}
                         />
                       </section>
                     </div>
