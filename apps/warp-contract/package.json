@@ -13,8 +13,8 @@
     "node": ">=18"
   },
   "devDependencies": {
-    "@gommette/types": "workspace:*",
     "@babel/preset-typescript": "^7.22.5",
+    "@gommette/types": "workspace:*",
     "@types/node": "20.4.5",
     "arlocal": "^1.1.61",
     "arweave": "^1.14.4",
@@ -31,6 +31,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "date-fns": "^2.30.0"
+    "date-fns": "^2.30.0",
+    "warp-contracts-plugin-deploy": "^1.0.9"
   }
 }

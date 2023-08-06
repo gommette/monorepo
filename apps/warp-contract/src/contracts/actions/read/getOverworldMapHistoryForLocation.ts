@@ -1,4 +1,4 @@
-import { ContractError } from 'warp-contracts'
+declare const ContractError
 import type { ContractResult, Coordinates, GommetteState, Sticker } from '../../types'
 
 export type GetOverworldMapHistoryForLocationFunction = 'getOverworldMapHistoryForLocation'

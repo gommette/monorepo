@@ -1,6 +1,6 @@
 import { getUnixTime } from 'date-fns'
 import type { ContractResult, Coordinates, GommetteState, Player, Sticker } from '../../types'
-import { ContractError } from 'warp-contracts'
+declare const ContractError
 
 export type PickStickerFunction = 'pickSticker'
 
@@ -43,7 +43,14 @@ export async function pickSticker(
   if (pinnedSticker.message.author === caller) {
     throw new ContractError("You can't pick stickers you pinned !")
   }
+
   const player: Player = state.players[caller]
+
+  // verify if the user is pinning the sticker at their geolocation
+  if (coordinates.join() !== player.coordinates.join()) {
+    throw new ContractError('You can only pick a sticker at your current geolocation !')
+  }
+
   const playerInventory = player?.inventory ?? []
   const collectedSticker: Sticker = {
     id: pinnedSticker.id,

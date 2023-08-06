@@ -1,4 +1,4 @@
-import { ContractError } from 'warp-contracts'
+declare const ContractError
 import type { ContractResult, GommetteState, Player, PlayerInventory } from '../../types'
 
 export type GetPlayerInventoryFunction = 'getPlayerInventory'

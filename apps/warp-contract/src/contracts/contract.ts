@@ -10,6 +10,7 @@ import type {
   PickStickerAction,
   GetOverworldMapAtTimestampAction,
   GetOverworldMapHistoryForLocationAction,
+  UpdateCurrentGeolocationAction,
 } from './actions'
 import {
   createStickerBoard,
@@ -23,6 +24,7 @@ import {
   pickSticker,
   getOverworldMapAtTimestamp,
   getOverworldMapHistoryForLocation,
+  updateCurrentGeolocation,
 } from './actions'
 import type { ContractResult, GommetteState, GommetteAction } from './types/types'
 
@@ -73,6 +75,10 @@ export async function handle(state: GommetteState, action: GommetteAction): Prom
 
     case 'pickSticker':
       return await pickSticker(state, action as PickStickerAction)
+      break
+
+    case 'updateCurrentGeolocation':
+      return await updateCurrentGeolocation(state, action as UpdateCurrentGeolocationAction)
       break
 
     default:

@@ -28,6 +28,8 @@ import type {
   PickStickerAction,
   PinStickerAction,
   PinStickerFunction,
+  UpdateCurrentGeolocationFunction,
+  UpdateCurrentGeolocationAction,
 } from '../actions'
 import { MappingIdPlayer, MappingIdStickerBoard, OverworldMap, StickerBoard } from '@gommette/types'
 
@@ -49,6 +51,7 @@ export type GommetteFunction =
   | LoadGameFunction
   | PickStickerFunction
   | PinStickerFunction
+  | UpdateCurrentGeolocationFunction
 
 export type GommetteResult =
   | GommetteState
@@ -73,5 +76,6 @@ export type GommetteAction =
   | LoadGameAction
   | PickStickerAction
   | PinStickerAction
+  | UpdateCurrentGeolocationAction
 
 export type ContractResult = { state: GommetteState } | { result: GommetteResult }

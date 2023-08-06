@@ -1,5 +1,5 @@
 import type { ContractResult, GommetteState, StickerBoard } from '../../types'
-import { ContractError } from 'warp-contracts'
+declare const ContractError
 
 export type GetStickerBoardByIdFunction = 'getStickerBoardById'
 export interface GetStickerBoardByIdInput {

@@ -1,6 +1,6 @@
 import { fromUnixTime, getUnixTime, isYesterday } from 'date-fns'
 import type { ContractResult, GommetteState, Player, Sticker } from '../../types'
-import { ContractError } from 'warp-contracts'
+declare const ContractError
 
 export type ClaimDailyDropFunction = 'claimDailyDrop'
 
@@ -25,7 +25,7 @@ export async function claimDailyDrop(
     throw new ContractError('Only players can claim a daily sticker drop !')
   }
   const player = state.players[caller]
-  const claimedDailyDropAt = !player?.claimDailyDrop ? getUnixTime(new Date()) : player.claimDailyDrop
+  const claimedDailyDropAt = !player?.claimedDailyDropAt ? getUnixTime(new Date()) : player.claimedDailyDropAt
 
   // Verify that the player didn't already claim today
   if (isYesterday(fromUnixTime(claimedDailyDropAt))) {

@@ -1,8 +1,7 @@
 import { GommetteState } from '../contracts/types'
 import genesisBoards from './../stickers.json'
 
-
-export const initialStateEmpty: GommetteState = {
+export const initialState: GommetteState = {
   players: {},
   stickerBoards: genesisBoards,
   overworldMap: {
