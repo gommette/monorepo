@@ -46,8 +46,8 @@ export interface Player {
   // prevent a user from claiming a sticker
   coordinates: Coordinates // verified on connect and before claiming a sticker
   inventory: PlayerInventory
-  creations: PlayerHistory
-  history: PlayerCreations
+  history: PlayerHistory
+  creations: PlayerCreations
   claimedDailyDropAt?: number
 }
 

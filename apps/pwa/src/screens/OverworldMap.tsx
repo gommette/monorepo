@@ -108,12 +108,11 @@ const Map = (props: MapProps) => {
             props.setViewport(evt)
           }}
         >
-
           <For each={Object.keys(appState?.overworldMap?.current)}>
             {(coordinates) => {
               const sticker = appState?.overworldMap.current[coordinates]
               const uriSticker = resolveUri(appState?.stickerBoards[sticker.idStickerBoard].uri)
-              
+
               return (
                 <Marker
                   lngLat={coordinates.split(',')}

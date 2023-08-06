@@ -90,9 +90,11 @@ importers:
       ts-node: ^10.9.1
       typescript: ^5.1.6
       warp-contracts: 1.4.14
+      warp-contracts-plugin-deploy: ^1.0.9
       yargs: 17.7.2
     dependencies:
       date-fns: 2.30.0
+      warp-contracts-plugin-deploy: 1.0.9_llec3yihdwku47dg5peehwoijy
     devDependencies:
       '@babel/preset-typescript': 7.22.5
       '@gommette/types': link:../../packages/types
@@ -4508,7 +4510,6 @@ packages:
       - tedious
       - typescript
       - utf-8-validate
-    dev: true
 
   /array-buffer-byte-length/1.0.0:
     resolution: {integrity: sha512-LPuwb2P+NrQw3XhxGc36+XSvuBPopovXYTR9Ew++Du9Yb/bx5AzBfrIsBoj0EZUifjQU+sHL21sseZ3jerWO/A==}
@@ -9934,7 +9935,6 @@ packages:
       string-argv: 0.1.2
       strip-ansi: 6.0.1
       typescript: 5.1.6
-    dev: true
 
   /tsd/0.19.0:
     resolution: {integrity: sha512-DlYCjjRVspfSAC+9X1NUDqPj0PtsVjUSyC4/OJpCGnY2Mtg0ddc+opckmnLV3RhUBpVuAAOrz661v+QSJwINkQ==}
@@ -10081,7 +10081,6 @@ packages:
     resolution: {integrity: sha512-zaWCozRZ6DLEWAWFrVDz1H6FVXzUSfTy5FUMWsQlU8Ym5JP9eO4xkTIROFCQvhQf61z6O/G6ugw3SgAnvvm+HA==}
     engines: {node: '>=14.17'}
     hasBin: true
-    dev: true
 
   /uint8arrays/3.1.1:
     resolution: {integrity: sha512-+QJa8QRnbdXVpHYjLoTpJIdCTiw9Ir62nocClWuXIq2JIh4Uta0cQsTSpFL678p2CN8B+XSApwcU+pQEqVpKWg==}
@@ -10386,6 +10385,33 @@ packages:
       base64url: 3.0.1
       buffer: 6.0.3
       warp-isomorphic: 1.0.4
+
+  /warp-contracts-plugin-deploy/1.0.9_llec3yihdwku47dg5peehwoijy:
+    resolution: {integrity: sha512-KuG8WK+5IR000jq2miAJ1/CbzBNDfxNvC6DEZdJ2uM6b8yNFu12aSGq5XpcWJhPe3v7hrMwdaOjBukYJ1vQ9TQ==}
+    engines: {node: '>=16.5'}
+    peerDependencies:
+      warp-arbundles: ^1.0.1
+      warp-contracts: ^1.4.5
+    dependencies:
+      arbundles: 0.7.3
+      arlocal: 1.1.61_typescript@5.1.6
+      node-stdlib-browser: 1.2.0
+      warp-contracts: 1.4.14
+    transitivePeerDependencies:
+      - '@solana/web3.js'
+      - bluebird
+      - bufferutil
+      - debug
+      - encoding
+      - mysql
+      - mysql2
+      - pg
+      - pg-native
+      - supports-color
+      - tedious
+      - typescript
+      - utf-8-validate
+    dev: false
 
   /warp-contracts-plugin-deploy/1.0.9_warp-contracts@1.4.14:
     resolution: {integrity: sha512-KuG8WK+5IR000jq2miAJ1/CbzBNDfxNvC6DEZdJ2uM6b8yNFu12aSGq5XpcWJhPe3v7hrMwdaOjBukYJ1vQ9TQ==}
