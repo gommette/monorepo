@@ -4,7 +4,7 @@ import { WarpFactory } from 'warp-contracts'
 import { DeployPlugin, ArweaveSigner } from 'warp-contracts-plugin-deploy'
 import { initialState } from './initialState'
 ;(async () => {
-  const warp = WarpFactory.forMainnet()
+  const warp = WarpFactory.forMainnet().use(new DeployPlugin())
   let wallet: any
   let walletDir = path.resolve('.secrets')
   let walletFilename = path.join(walletDir, `/wallet_${warp.environment}.json`)

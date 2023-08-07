@@ -3,9 +3,19 @@ import { Avatar, AvatarFallback, AvatarImage, DialogTitle } from '@ark-ui/solid'
 import { Dialog, DialogTrigger } from '@ark-ui/solid'
 import { Dialog as DialogDrawerBody } from '../components'
 import { Portal } from 'solid-js/web'
+import { useDictionary } from '../features'
+
+const dictionary = {
+  en: {
+    callToAction_SignOut_label: 'Sign out',
+    dialogAccountTitle_label: 'Your account',
+  },
+}
+const [t] = useDictionary(dictionary)
 
 export const AppOverlay = () => {
   const { storeAuthentication, mutationSignOut } = useAuthentication()
+
   return (
     <>
       <Dialog>
@@ -19,11 +29,11 @@ export const AppOverlay = () => {
               />
             </DialogTrigger>
             <Portal>
-              <DialogDrawerBody isOpen={state().isOpen} class="flex flex-col  max-h-[90dvh] overflow-y-auto">
+              <DialogDrawerBody isOpen={state().isOpen} class="flex flex-col max-h-[90dvh] overflow-y-auto">
                 <DialogTitle class="w-full sticky top-0 bg-neutral-2 border-b border-neutral-5 text-primary-neutral-12 pt-1.5 leading-relaxed px-3 font-bold text-lg">
-                  Your account
+                  {t.dialogAccountTitle_label()}
                 </DialogTitle>
-                <div class="w-full pb-6 pt-6 px-3">
+                <div class="w-full py-6 px-3">
                   <section>
                     <div class="flex gap-x-3">
                       <Avatar class="w-8">
@@ -41,7 +51,7 @@ export const AppOverlay = () => {
                           onClick={() => mutationSignOut.mutate()}
                           class="text-primary-11"
                         >
-                          Sign out
+                          {t.callToAction_SignOut_label()}
                         </button>
                       </div>
                     </div>

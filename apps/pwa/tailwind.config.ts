@@ -38,6 +38,7 @@ const config: Config = {
       sans: ['"Atkinson Hyperlegible", sans-serif'],
     },
     fontSize: {
+      '2xs': clamp(-5.25),
       xs: clamp(-2),
       sm: clamp(-1),
       base: clamp(0),

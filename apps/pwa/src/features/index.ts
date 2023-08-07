@@ -1,3 +1,8 @@
 export * from './authentication'
+export * from './claim-daily-drop'
 export * from './geolocation'
+export * from './gommette'
 export * from './internationalization'
+export * from './inventory'
+export * from './pin-sticker'
+export * from './pick-sticker '

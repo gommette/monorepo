@@ -1,6 +1,7 @@
 This repository is a monorepo that contains the source cod of our entry to the [Arweave community hackathon](https://arweavehub.com/#/hackathon), Gommette.
 
-- [smart contract deployed to SonAr](https://sonar.warp.cc/#/app/contract/WmoZmrJkKuKL3krOoOqRwhQA9samd5CMWbHczEZ3zEA?network=testnet)
+- [smart contract deployed to SonAr testnet](https://sonar.warp.cc/#/app/contract/d1f97pYsNhsnVyIDWaQ0LpI7c7nZdaL4w1Doa0VKUiE?network=testnet)
+- [smart contract deployed to SonAr mainnet](https://sonar.warp.cc/#/app/contract/AktpLi9jA4-CC1elBEXefqHVDzi3LZxYArs6PB6qTPs)
 - Assets manifest ID: `TmxMV7ncy72eNFFoUaS1hlBMdii127hgVCxpgjEjAlo`
 
 # About

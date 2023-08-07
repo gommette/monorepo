@@ -31,13 +31,9 @@ import type {
   UpdateCurrentGeolocationFunction,
   UpdateCurrentGeolocationAction,
 } from '../actions'
-import { MappingIdPlayer, MappingIdStickerBoard, OverworldMap, StickerBoard } from '@gommette/types'
+import { MappingIdPlayer, MappingIdStickerBoard, OverworldMap, StickerBoard, AppState } from '@gommette/types'
 
-export interface GommetteState {
-  players: MappingIdPlayer
-  stickerBoards: MappingIdStickerBoard
-  overworldMap: OverworldMap
-}
+export type GommetteState = AppState
 
 export type GommetteFunction =
   | ClaimDailyDropFunction

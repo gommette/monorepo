@@ -4,20 +4,26 @@ import { createMutationObserver } from '@solid-primitives/mutation-observer'
 import MapGL, { Viewport, Control, Marker } from 'solid-map-gl'
 import { For, Show, createEffect, createSignal } from 'solid-js'
 import type { Accessor, Setter, Component, Resource } from 'solid-js'
-import { RiCommunicationEmojiStickerFill } from 'solid-icons/ri'
-import { Loader, Dialog as DialogDrawerBody, Button, callToAction } from '../components'
-import { Dialog, DialogTitle, DialogTrigger } from '@ark-ui/solid'
-import { Portal } from 'solid-js/web'
-import { useDictionary } from '../features'
+import { BiRegularNotification } from 'solid-icons/bi'
+import { IoGridOutline } from 'solid-icons/io'
+import { AiOutlinePushpin } from 'solid-icons/ai'
+import { Loader } from '../components'
+import {
+  DialogClaimDailyDrop,
+  DialogInventory,
+  DialogPickSticker,
+  DialogPinSticker,
+  useDictionary,
+  useGommette,
+} from '../features'
 import { resolveUri } from '../helpers'
+import type { Sticker } from '@gommette/types'
 
-const appState = {}
 const dictionary = {
   en: {
-    callToAction_PickPinnedSticker_label: 'Pick up',
-    callToAction_ViewPinnedSticker_label: 'Pinned sticker details',
-    link_OpenDirectionOnMaps_Label: 'Open directions on Maps',
-    details_PinnedBy_text: ({ author }: { author: string }) => `Pinned by ${author}`,
+    dialogTrigger_ClaimDailyDrop_label: 'Daily drop',
+    dialogTrigger_Inventory_label: 'My stickers',
+    dialogTrigger_PinSticker_label: 'Pin',
   },
 }
 const [t] = useDictionary(dictionary)
@@ -30,13 +36,19 @@ const [t] = useDictionary(dictionary)
 export const OverworldMap: Component = () => {
   const [location] = createGeolocation()
   const [viewport, setViewport] = createSignal({} as Viewport)
-
-  createEffect(() => {
+  const { mutationPlayerGeolocation } = useGommette()
+  createEffect(async () => {
     if (location()?.latitude && location()?.longitude) {
+      const long = location()?.longitude
+      const lat = location()?.latitude
+
       setViewport({
         zoom: 15,
-        center: [location()?.longitude, location()?.latitude],
+        center: [long, lat],
       })
+
+      // update current user geolocation in Gommette state
+      await mutationPlayerGeolocation.mutateAsync({ coordinates: [location().longitude, location().latitude] })
     }
   })
 
@@ -66,9 +78,14 @@ interface MapProps {
  */
 const Map = (props: MapProps) => {
   let refMapboxWrapper
+  let refDialogPinSticker
+  let refDialogInventory
   let refDialogPinnedStickerDetails
-  const [viewingSticker, setViewingSticker] = createSignal(null)
+  let refDialogClaimDailyDrop
+  const [viewingPinnedSticker, setViewingPinnedSticker] = createSignal<null | Sticker>(null)
   const [isGeolocationControlHidden] = createSignal(false)
+  const { queryCurrentOverworld, queryStickerBoards } = useGommette()
+
   const [, { stop }] = createMutationObserver(
     () => refMapboxWrapper,
     { attributes: true, subtree: true },
@@ -90,11 +107,32 @@ const Map = (props: MapProps) => {
   createEffect(() => {
     if (isGeolocationControlHidden() === true) stop()
   })
+
   return (
     <>
       <div class="z-10 fixed border border-neutral-6 inset-0 flex items-end justify-center pb-12 pointer-events-none w-full">
-        <div class="bg-neutral-1 w-3/4 shadow-xl rounded-lg p-6">
-          <RiCommunicationEmojiStickerFill />
+        <div class="bg-neutral-1 pointer-events-auto grid grid-cols-3 gap-8 shadow-xl rounded-xl px-3 pb-0.25  pt-1.5">
+          <button
+            onClick={() => refDialogInventory.click()}
+            class="flex flex-col leading-loose items-center justify-center aspect-square"
+          >
+            <IoGridOutline size={20} />
+            <span class="text-2xs text-neutral-11">{t.dialogTrigger_Inventory_label()}</span>
+          </button>
+          <button
+            onClick={() => refDialogPinSticker.click()}
+            class="flex flex-col leading-loose items-center justify-center aspect-square"
+          >
+            <AiOutlinePushpin size={24} />
+            <span class="text-2xs text-neutral-11">{t.dialogTrigger_PinSticker_label()}</span>
+          </button>
+          <button
+            onClick={() => refDialogClaimDailyDrop.click()}
+            class="flex flex-col leading-loose items-center justify-center aspect-square"
+          >
+            <BiRegularNotification size={24} />
+            <span class="text-2xs text-neutral-11">{t.dialogTrigger_ClaimDailyDrop_label()}</span>
+          </button>
         </div>
       </div>
       <div ref={refMapboxWrapper}>
@@ -108,30 +146,36 @@ const Map = (props: MapProps) => {
             props.setViewport(evt)
           }}
         >
-          <For each={Object.keys(appState?.overworldMap?.current)}>
-            {(coordinates) => {
-              const sticker = appState?.overworldMap.current[coordinates]
-              const uriSticker = resolveUri(appState?.stickerBoards[sticker.idStickerBoard].uri)
-
-              return (
-                <Marker
-                  lngLat={coordinates.split(',')}
-                  options={{
-                    element: (
-                      <button
-                        onClick={() => {
-                          setViewingSticker(sticker)
-                          refDialogPinnedStickerDetails.click()
-                        }}
-                      >
-                        <img class="w-5" src={uriSticker} />
-                      </button>
-                    ),
-                  }}
-                />
-              )
-            }}
-          </For>
+          <Show
+            when={
+              queryCurrentOverworld?.data?.overworldMap &&
+              Object.keys(queryCurrentOverworld?.data?.overworldMap).length > 0
+            }
+          >
+            <For each={Object.keys(queryCurrentOverworld?.data?.overworldMap)}>
+              {(coordinates) => {
+                const sticker: Sticker = queryCurrentOverworld?.data?.overworldMap[coordinates]
+                const uriSticker = resolveUri(queryStickerBoards?.data?.stickerBoards?.[sticker?.idStickerBoard]?.uri)
+                return (
+                  <Marker
+                    lngLat={coordinates.split(',')}
+                    options={{
+                      element: (
+                        <button
+                          onClick={() => {
+                            setViewingPinnedSticker(sticker)
+                            refDialogPinnedStickerDetails.click()
+                          }}
+                        >
+                          <img class="w-5" src={uriSticker} />
+                        </button>
+                      ),
+                    }}
+                  />
+                )
+              }}
+            </For>
+          </Show>
 
           <Control
             options={{
@@ -146,61 +190,10 @@ const Map = (props: MapProps) => {
           />
         </MapGL>
       </div>
-      <Dialog>
-        {(state) => (
-          <>
-            <DialogTrigger ref={refDialogPinnedStickerDetails} class="sr-only">
-              {t.callToAction_PickPinnedSticker_label()}
-            </DialogTrigger>
-
-            <Portal>
-              <DialogDrawerBody isOpen={state().isOpen} class="flex flex-col  max-h-[90dvh] overflow-y-auto">
-                <div class="w-full pt-6">
-                  <div class="flex items-center gap-3 flex-col-reverse">
-                    <DialogTitle class="text-neutral-11 text-xs">
-                      {viewingSticker()?.id} - {appState?.stickerBoards[viewingSticker()?.idStickerBoard].name}
-                    </DialogTitle>
-                    <div class="px-6">
-                      <section>
-                        <img
-                          alt={appState?.stickerBoards[viewingSticker()?.idStickerBoard].name}
-                          class="animate-revolve w-24"
-                          src={resolveUri(appState?.stickerBoards[viewingSticker()?.idStickerBoard].uri)}
-                        />
-                      </section>
-                    </div>
-                  </div>
-                  <section class="grid py-3 border-b border-b-neutral-5 px-6 gap-1.5">
-                    <Button class="text-sm inline-flex items-center justify-center">
-                      {t.callToAction_PickPinnedSticker_label()}
-                    </Button>
-                    <a
-                      class={callToAction({
-                        intent: 'primary-ghost',
-                        class: 'text-xs inline-flex items-center justify-center',
-                      })}
-                      target="_blank"
-                      href={`https://www.google.com/maps/dir/?api=1&destination=${
-                        viewingSticker().message.coordinates[1]
-                      },${viewingSticker().message.coordinates[0]}`}
-                    >
-                      {t.link_OpenDirectionOnMaps_Label()}
-                    </a>
-                  </section>
-                  <section class="max-w-prose px-6 pt-3 pb-6 mx-auto">
-                    <p class="text-metal-11 pb-1.5 text-xs text-center">
-                      {t.details_PinnedBy_text({
-                        author: viewingSticker().message.author,
-                      })}
-                    </p>
-                    <p class="text-primary-neutral-12 italic">{viewingSticker().message.text}</p>
-                  </section>
-                </div>
-              </DialogDrawerBody>
-            </Portal>
-          </>
-        )}
-      </Dialog>
+      <DialogPickSticker sticker={viewingPinnedSticker} ref={refDialogPinnedStickerDetails} />
+      <DialogInventory ref={refDialogInventory} />
+      <DialogPinSticker ref={refDialogPinSticker} />
+      <DialogClaimDailyDrop ref={refDialogClaimDailyDrop} />
     </>
   )
 }

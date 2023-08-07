@@ -1,4 +1,3 @@
-declare const ContractError
 import type { ContractResult, GommetteState, Player, PlayerInventory } from '../../types'
 
 export type GetPlayerInventoryFunction = 'getPlayerInventory'
@@ -27,10 +26,8 @@ export async function getPlayerInventory(
   } else {
     player = state.players[caller]
   }
-  if (!player) {
-    throw new ContractError("Can't fetch inventory for this player.")
-  }
   const inventory = player?.inventory ?? []
+
   return {
     result: {
       inventory,

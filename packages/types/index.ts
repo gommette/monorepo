@@ -78,3 +78,9 @@ export interface OverworldMap {
     location: MappingOverworldMapLocationBasedHistory
   }
 }
+
+export interface AppState {
+  players: MappingIdPlayer
+  stickerBoards: MappingIdStickerBoard
+  overworldMap: OverworldMap
+}

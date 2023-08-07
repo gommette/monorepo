@@ -7,7 +7,8 @@
     "build-ts": "node build.js",
     "build": "pnpm run clean && pnpm run build-ts",
     "deploy:mainnet": "pnpm ts-node src/tools/deploy-contract.ts",
-    "deploy:testnet": "pnpm ts-node src/tools/deploy-testnet-contract.ts"
+    "deploy:testnet": "pnpm ts-node src/tools/deploy-testnet-contract.ts",
+    "arkit:deploy:testnet": "pnpm ts-node src/tools/arkit-deploy-testnet.ts"
   },
   "engines": {
     "node": ">=18"
@@ -18,20 +19,20 @@
     "@types/node": "20.4.5",
     "arlocal": "^1.1.61",
     "arweave": "^1.14.4",
+    "arweavekit": "^1.4.6",
     "copyfiles": "^2.4.1",
+    "date-fns": "^2.30.0",
     "esbuild": "0.18.17",
     "replace-in-file": "^7.0.1",
     "rimraf": "^5.0.1",
     "ts-node": "^10.9.1",
     "typescript": "^5.1.6",
     "warp-contracts": "1.4.14",
+    "warp-contracts-plugin-deploy": "^1.0.9",
     "yargs": "17.7.2"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
-  "dependencies": {
-    "date-fns": "^2.30.0",
-    "warp-contracts-plugin-deploy": "^1.0.9"
-  }
+  "dependencies": {}
 }
