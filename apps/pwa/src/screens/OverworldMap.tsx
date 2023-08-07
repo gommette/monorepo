@@ -22,7 +22,7 @@ import type { Sticker } from '@gommette/types'
 const dictionary = {
   en: {
     dialogTrigger_ClaimDailyDrop_label: 'Daily drop',
-    dialogTrigger_Inventory_label: 'My stickers',
+    dialogTrigger_Inventory_label: 'My inventory',
     dialogTrigger_PinSticker_label: 'Pin',
   },
 }

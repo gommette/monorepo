@@ -10,7 +10,7 @@ import { resolveUri } from '../../helpers'
 const dictionary = {
   en: {
     dialogTrigger_label: 'My inventory',
-    dialogTitle_label: 'My stickers',
+    dialogTitle_label: 'My inventory',
     dialogPinSticker_label: 'Pin sticker',
     callToAction_PinSticker_label: 'Pin to map',
     callToAction_SelectStickerToPin_label: 'Select a sticker to pin',
