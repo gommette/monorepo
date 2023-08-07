@@ -10,7 +10,7 @@ This repository is a monorepo that contains the source cod of our entry to the [
 
 ## Features
 
-- [x] Social login via Arweavekit and Othent : use your e-mail, Google account or Apple ID to sign-in ! ; 
+- [x] Social login via Arweavekit and Othent : use your e-mail, Google account or Apple ID to sign-in ! ;
 - [x] Borderless, real-time game system that will run for at least the next 100 years thanks to a Warp smart contract
   - [x] Daily sticker drop: everyday, players can claim 3 random stickers ;
   - [x] Sticker collection: players can collect their stickers in their inventory, with each sticker having a different level of rarity ;
@@ -18,6 +18,7 @@ This repository is a monorepo that contains the source cod of our entry to the [
   - [x] Pick stickers: players can collect the stickers pinned by other players. Collect them, pin them: it's up to you !
 
 ### Future vision
+
 Allow the players to shape and define Gommette by :
 
 - [ ] Designing their own stickers - ultimately, all of the genesis stickers will be used (not implemented on the frontend, implemented in the smart contract)

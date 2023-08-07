@@ -1,6 +1,6 @@
 import { Dialog, DialogTrigger, DialogTitle } from '@ark-ui/solid'
 import { Portal } from 'solid-js/web'
-import { Loader, Dialog as DialogDrawerBody, Button } from '../../components'
+import { Loader, Dialog as DialogDrawerBody, Button, FormTextarea } from '../../components'
 import { useDictionary } from '../internationalization'
 import type { PlayerInventory, Sticker } from '@gommette/types'
 import { createSignal, For, Switch, Match } from 'solid-js'
@@ -10,10 +10,10 @@ import { resolveUri } from '../../helpers'
 const dictionary = {
   en: {
     dialogTrigger_label: 'Pin a sticker',
-    dialogTitle_label: 'Pin sticker to the map',
+    dialogTitle_label: 'Pin a sticker on the map',
     callToAction_label: 'Pin to map',
     form_PickSticker_label: 'Pick a sticker',
-    form_InputMessage_label: 'Add your message',
+    form_InputMessage_label: 'Your message',
     paragraph_EmptyInventory_text: "You don't have any stickers in your inventory yet.",
     callToAction_GoBack_label: 'Back to map',
   },
@@ -46,7 +46,7 @@ export const DialogPinSticker = (props: DialogPinStickerProps) => {
                   <Match when={queryPlayer?.status === 'loading'}>
                     <Loader isVisible={queryPlayer?.status === 'loading'} />
                   </Match>
-                  <Match when={queryPlayer?.data?.player?.inventory?.length === 0}>
+                  <Match when={queryPlayer?.data?.player?.inventory?.length > 0}>
                     <section class="py-3 px-6 rounded bg-primary-neutral-3 border border-primary-neutral-6 text-primary-neutral-11">
                       <p>{t.paragraph_EmptyInventory_text()}</p>
                     </section>
@@ -59,10 +59,21 @@ export const DialogPinSticker = (props: DialogPinStickerProps) => {
                       {t.callToAction_GoBack_label()}
                     </Button>
                   </Match>
-                  <Match when={queryPlayer?.data?.player?.inventory?.length > 0}>
-                    <form>
+                  <Match when={queryPlayer?.data?.player?.inventory?.length === 0}>
+                    <form
+                      onSubmit={(e) => {
+                        e.preventDefault()
+                        const data = {
+                          //@ts-ignore
+                          idSticker: e.target?.elements?.sticker?.value,
+                          //@ts-ignore
+                          message: e.target?.elements?.message?.value,
+                        }
+                      }}
+                      class="gap-6 flex flex-col"
+                    >
                       <fieldset>
-                        <legend>{t.form_PickSticker_label()}</legend>
+                        <legend class="text-sm text-metal-11">{t.form_PickSticker_label()}</legend>
 
                         <div class="grid grid-cols-4 gap-3">
                           <For each={queryPlayer?.data?.player?.inventory}>
@@ -88,8 +99,12 @@ export const DialogPinSticker = (props: DialogPinStickerProps) => {
                         </div>
                       </fieldset>
                       <fieldset>
-                        <label for="message">{t.form_InputMessage_label()}</label>
-                        <textarea name="message" />
+                        <div class="flex flex-col">
+                          <label class="text-sm text-metal-11" for="message">
+                            {t.form_InputMessage_label()}
+                          </label>
+                          <FormTextarea hasError={false} class="w-full" name="message" />
+                        </div>
                       </fieldset>
                       <Button class="w-full inline-flex justify-center items-center">{t.callToAction_label()}</Button>
                     </form>
