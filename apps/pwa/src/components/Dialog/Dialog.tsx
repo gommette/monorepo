@@ -1,6 +1,7 @@
 import { DialogBackdrop, DialogContainer, DialogContent } from '@ark-ui/solid'
-import { type JSX } from 'solid-js'
+import { Show, type JSX } from 'solid-js'
 import { cva, type VariantProps } from 'class-variance-authority'
+import { Transition } from 'solid-transition-group'
 
 export const dialogContent = cva('bg-neutral-2 shadow-lg relative', {
   variants: {
@@ -20,22 +21,33 @@ export const dialogContent = cva('bg-neutral-2 shadow-lg relative', {
 })
 
 export type SystemUiDialogProps = VariantProps<typeof dialogContent>
-export interface DialogProps extends SystemUiDialogProps, JSX.BaseHTMLAttributes<HTMLDialogElement> {}
+export interface DialogProps extends SystemUiDialogProps, JSX.BaseHTMLAttributes<HTMLDialogElement> {
+  isOpen: boolean
+}
 
 export const Dialog = (props: DialogProps) => {
   return (
     <>
-      <DialogBackdrop class="z-50 fixed inset-0 bg-neutral-12 bg-opacity-75" />
+      <Transition enterActiveClass="animate-backdropIn" exitActiveClass="animate-backdropOut">
+        <Show when={props.isOpen}>
+          <DialogBackdrop class="z-50 fixed inset-0 bg-neutral-12 bg-opacity-75" />
+        </Show>
+      </Transition>
+
       <DialogContainer class="z-50 flex items-end justify-center inset-0 fixed">
-        <DialogContent
-          class={dialogContent({
-            intent: props.intent ?? 'bottom-drawer',
-            scale: props.scale ?? 'default',
-            class: props.class ?? '',
-          })}
-        >
-          {props.children}
-        </DialogContent>
+        <Transition enterActiveClass="animate-slideIn" exitActiveClass="animate-slideOut">
+          <Show when={props.isOpen}>
+            <DialogContent
+              class={dialogContent({
+                intent: props.intent ?? 'bottom-drawer',
+                scale: props.scale ?? 'default',
+                class: props.class ?? '',
+              })}
+            >
+              {props.children}
+            </DialogContent>
+          </Show>
+        </Transition>
       </DialogContainer>
     </>
   )

@@ -11,6 +11,7 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "@gommette/types": "workspace:*",
     "@rollup/plugin-replace": "^5.0.2",
     "autoprefixer": "^10.4.14",
     "postcss": "^8.4.24",
@@ -33,11 +34,14 @@
     "@tanstack/solid-query": "^4.32.0",
     "arweavekit": "^1.4.6",
     "class-variance-authority": "^0.7.0",
+    "date-fns": "^2.30.0",
     "mapbox-gl": "^2.15.0",
+    "othent": "^1.0.638",
     "solid-icons": "^1.0.11",
     "solid-js": "^1.7.6",
     "solid-leva": "^0.0.2",
     "solid-map-gl": "^1.9.2",
-    "solid-transition-group": "^0.2.2"
+    "solid-transition-group": "^0.2.2",
+    "warp-contracts": "1.4.14"
   }
 }

@@ -38,6 +38,7 @@ const config: Config = {
       sans: ['"Atkinson Hyperlegible", sans-serif'],
     },
     fontSize: {
+      '2xs': clamp(-5.25),
       xs: clamp(-2),
       sm: clamp(-1),
       base: clamp(0),
@@ -78,6 +79,14 @@ const config: Config = {
           '0%': { opacity: '1', transform: 'translateY(0)' },
           '100%': { opacity: '0', transform: 'translateY(64px)' },
         },
+        revolve: {
+          from: {
+            transform: 'rotateY(360deg)',
+          },
+          to: {
+            transform: 'rotateY(0)',
+          },
+        },
       },
 
       animation: {
@@ -87,6 +96,7 @@ const config: Config = {
         slideOut: 'slideOut 0.2s ease-in forwards',
         backdropIn: 'backdropIn 0.25s ease-out forwards',
         backdropOut: 'backdropOut 0.2s ease-in forwards',
+        revolve: 'revolve 5s linear infinite',
       },
       colors: {
         primary: {

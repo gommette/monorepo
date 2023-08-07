@@ -1,21 +1,54 @@
 import 'mapbox-gl/dist/mapbox-gl.css'
 import { createGeolocation } from '@solid-primitives/geolocation'
 import { createMutationObserver } from '@solid-primitives/mutation-observer'
-import MapGL, { Viewport, Control } from 'solid-map-gl'
-import { Show, createEffect, createSignal } from 'solid-js'
-import { RiCommunicationEmojiStickerFill } from 'solid-icons/ri'
+import MapGL, { Viewport, Control, Marker } from 'solid-map-gl'
+import { For, Show, createEffect, createSignal } from 'solid-js'
+import type { Accessor, Setter, Component, Resource } from 'solid-js'
+import { BiRegularNotification } from 'solid-icons/bi'
+import { IoGridOutline } from 'solid-icons/io'
+import { AiOutlinePushpin } from 'solid-icons/ai'
 import { Loader } from '../components'
+import {
+  DialogClaimDailyDrop,
+  DialogInventory,
+  DialogPickSticker,
+  DialogPinSticker,
+  useDictionary,
+  useGommette,
+} from '../features'
+import { resolveUri } from '../helpers'
+import type { Sticker } from '@gommette/types'
 
-export const OverworldMap = () => {
+const dictionary = {
+  en: {
+    dialogTrigger_ClaimDailyDrop_label: 'Daily drop',
+    dialogTrigger_Inventory_label: 'My stickers',
+    dialogTrigger_PinSticker_label: 'Pin',
+  },
+}
+const [t] = useDictionary(dictionary)
+
+/**
+ * Wrapper for a Mapbox map ;
+ * Gets the geolocation of the user then displays the map ;
+ * Fallback displays a loader
+ */
+export const OverworldMap: Component = () => {
   const [location] = createGeolocation()
   const [viewport, setViewport] = createSignal({} as Viewport)
-
-  createEffect(() => {
+  const { mutationPlayerGeolocation } = useGommette()
+  createEffect(async () => {
     if (location()?.latitude && location()?.longitude) {
+      const long = location()?.longitude
+      const lat = location()?.latitude
+
       setViewport({
         zoom: 15,
-        center: [location()?.longitude, location()?.latitude],
+        center: [long, lat],
       })
+
+      // update current user geolocation in Gommette state
+      await mutationPlayerGeolocation.mutateAsync({ coordinates: [location().longitude, location().latitude] })
     }
   })
 
@@ -35,11 +68,26 @@ export const OverworldMap = () => {
   )
 }
 
-const Map = (props) => {
-  let ref
+interface MapProps {
+  viewport: Accessor<Viewport>
+  setViewport: Setter<Viewport>
+  location: Resource<GeolocationCoordinates>
+}
+/**
+ * Mapbox map
+ */
+const Map = (props: MapProps) => {
+  let refMapboxWrapper
+  let refDialogPinSticker
+  let refDialogInventory
+  let refDialogPinnedStickerDetails
+  let refDialogClaimDailyDrop
+  const [viewingPinnedSticker, setViewingPinnedSticker] = createSignal<null | Sticker>(null)
   const [isGeolocationControlHidden] = createSignal(false)
+  const { queryCurrentOverworld, queryStickerBoards } = useGommette()
+
   const [, { stop }] = createMutationObserver(
-    () => ref,
+    () => refMapboxWrapper,
     { attributes: true, subtree: true },
     (records) => {
       const controlGeolocation = records.filter((record) => {
@@ -59,15 +107,35 @@ const Map = (props) => {
   createEffect(() => {
     if (isGeolocationControlHidden() === true) stop()
   })
+
   return (
     <>
       <div class="z-10 fixed border border-neutral-6 inset-0 flex items-end justify-center pb-12 pointer-events-none w-full">
-        <div class="bg-neutral-1 w-3/4 shadow-xl rounded-lg p-6">
-          <RiCommunicationEmojiStickerFill />
+        <div class="bg-neutral-1 pointer-events-auto grid grid-cols-3 gap-8 shadow-xl rounded-xl px-3 pb-0.25  pt-1.5">
+          <button
+            onClick={() => refDialogInventory.click()}
+            class="flex flex-col leading-loose items-center justify-center aspect-square"
+          >
+            <IoGridOutline size={20} />
+            <span class="text-2xs text-neutral-11">{t.dialogTrigger_Inventory_label()}</span>
+          </button>
+          <button
+            onClick={() => refDialogPinSticker.click()}
+            class="flex flex-col leading-loose items-center justify-center aspect-square"
+          >
+            <AiOutlinePushpin size={24} />
+            <span class="text-2xs text-neutral-11">{t.dialogTrigger_PinSticker_label()}</span>
+          </button>
+          <button
+            onClick={() => refDialogClaimDailyDrop.click()}
+            class="flex flex-col leading-loose items-center justify-center aspect-square"
+          >
+            <BiRegularNotification size={24} />
+            <span class="text-2xs text-neutral-11">{t.dialogTrigger_ClaimDailyDrop_label()}</span>
+          </button>
         </div>
       </div>
-
-      <div ref={ref}>
+      <div ref={refMapboxWrapper}>
         <MapGL
           options={{
             style: 'mb:light',
@@ -78,6 +146,37 @@ const Map = (props) => {
             props.setViewport(evt)
           }}
         >
+          <Show
+            when={
+              queryCurrentOverworld?.data?.overworldMap &&
+              Object.keys(queryCurrentOverworld?.data?.overworldMap).length > 0
+            }
+          >
+            <For each={Object.keys(queryCurrentOverworld?.data?.overworldMap)}>
+              {(coordinates) => {
+                const sticker: Sticker = queryCurrentOverworld?.data?.overworldMap[coordinates]
+                const uriSticker = resolveUri(queryStickerBoards?.data?.stickerBoards?.[sticker?.idStickerBoard]?.uri)
+                return (
+                  <Marker
+                    lngLat={coordinates.split(',')}
+                    options={{
+                      element: (
+                        <button
+                          onClick={() => {
+                            setViewingPinnedSticker(sticker)
+                            refDialogPinnedStickerDetails.click()
+                          }}
+                        >
+                          <img class="w-5" src={uriSticker} />
+                        </button>
+                      ),
+                    }}
+                  />
+                )
+              }}
+            </For>
+          </Show>
+
           <Control
             options={{
               trackUserLocation: true,
@@ -91,6 +190,10 @@ const Map = (props) => {
           />
         </MapGL>
       </div>
+      <DialogPickSticker sticker={viewingPinnedSticker} ref={refDialogPinnedStickerDetails} />
+      <DialogInventory ref={refDialogInventory} />
+      <DialogPinSticker ref={refDialogPinSticker} />
+      <DialogClaimDailyDrop ref={refDialogClaimDailyDrop} />
     </>
   )
 }

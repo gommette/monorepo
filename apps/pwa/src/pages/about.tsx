@@ -7,10 +7,6 @@ export default function About() {
   const { mutationSignOut } = useAuthentication()
   const name = useRouteData<AboutDataType>()
 
-  createEffect(() => {
-    console.log(name())
-  })
-
   return (
     <section class="bg-pink-100 text-gray-700 p-8">
       <button onClick={() => mutationSignOut.mutate()}>sign out</button>

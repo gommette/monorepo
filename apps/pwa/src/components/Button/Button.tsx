@@ -19,7 +19,7 @@ export const callToAction = cva(
           'border-primary-9 focus:border-primary-11',
         ],
         'primary-ghost': [
-          'border-transparent bg-primary-4 bg-opacity-0 text-primary-11 hover:bg-opacity-100 focus:border-transparent focus:bg-opacity-100 focus:text-primary-1',
+          'border-transparent bg-primary-4 bg-opacity-0 text-primary-9 hover:bg-opacity-100 focus:border-transparent focus:bg-opacity-100 focus:text-primary-11',
         ],
         'primary-faint': [
           'border-transparent  bg-primary-4 bg-opacity-75 text-primary-11 hover:bg-opacity-50 focus:border-transparent focus:bg-opacity-100 focus:text-primary-11',

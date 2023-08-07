@@ -1,0 +1,8 @@
+{
+  "name": "stickerboards-file-uploader",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "upload genesis sticker boards files to Arweave via Bundlr",
+  "license": "MIT",
+  "scripts": {}
+}

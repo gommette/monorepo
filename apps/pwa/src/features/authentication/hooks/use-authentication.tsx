@@ -4,7 +4,6 @@ import { createMutation, type CreateMutationResult } from '@tanstack/solid-query
 import { Othent } from 'arweavekit/auth'
 import type { UserDetailsReturnProps } from 'arweavekit/dist/types/auth'
 import { useLocation, useNavigate } from '@solidjs/router'
-
 interface Authentication {
   /** Wheter the wallet is connected */
   connected: boolean

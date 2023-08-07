@@ -10,8 +10,9 @@ const dictionary = {
     mutationSignInPending: 'Continue with...',
   },
 }
+const [t] = useDictionary(dictionary)
+
 export const Landing = () => {
-  const [t] = useDictionary(dictionary)
   const { mutationSignIn, mutationCurrentUser } = useAuthentication()
 
   return (
