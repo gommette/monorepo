@@ -1,12 +1,29 @@
 This repository is a monorepo that contains the source cod of our entry to the [Arweave community hackathon](https://arweavehub.com/#/hackathon), Gommette.
 
-- [smart contract deployed to SonAr testnet](https://sonar.warp.cc/#/app/contract/d1f97pYsNhsnVyIDWaQ0LpI7c7nZdaL4w1Doa0VKUiE?network=testnet)
-- [smart contract deployed to SonAr mainnet](https://sonar.warp.cc/#/app/contract/AktpLi9jA4-CC1elBEXefqHVDzi3LZxYArs6PB6qTPs)
+- [smart contract deployed to Sonar testnet](https://sonar.warp.cc/#/app/contract/d1f97pYsNhsnVyIDWaQ0LpI7c7nZdaL4w1Doa0VKUiE?network=testnet)
+- [smart contract deployed to Sonar mainnet](https://sonar.warp.cc/#/app/contract/AktpLi9jA4-CC1elBEXefqHVDzi3LZxYArs6PB6qTPs)
 - Assets manifest ID: `TmxMV7ncy72eNFFoUaS1hlBMdii127hgVCxpgjEjAlo`
 
 # About
 
 **Gommette** is a geosocial mobile game that encourages players to explore their surroundings and connect with others through **digital stickers**. Each day, users receive a random pack of stickers with messages, which they can pin to specific geolocations. Players can pick up stickers left by others if they are physically present at that location. The game also allows users to create custom designs, contribute to the map with respawn locations, and participate in sponsored quests for unique stickers. Gommette aims to promote local exploration, foster a community-driven experience, and, in the long run, replace generic stickers with user-designed content for an ever-evolving gaming adventure :v:
+
+## Features
+
+- [x] Social login via Arweavekit and Othent : use your e-mail, Google account or Apple ID to sign-in ! ; 
+- [x] Borderless, real-time game system that will run for at least the next 100 years thanks to a Warp smart contract
+  - [x] Daily sticker drop: everyday, players can claim 3 random stickers ;
+  - [x] Sticker collection: players can collect their stickers in their inventory, with each sticker having a different level of rarity ;
+  - [x] Pin your stickers: players can drop a sticker from their inventory on the map and pin it at their current geolocation with a message attached to it... as well as specific pick-up rules, like having to sacrifice specific stickers in specific amounts or pinning your own stickers.
+  - [x] Pick stickers: players can collect the stickers pinned by other players. Collect them, pin them: it's up to you !
+
+### Future vision
+Allow the players to shape and define Gommette by :
+
+- [ ] Designing their own stickers - ultimately, all of the genesis stickers will be used (not implemented on the frontend, implemented in the smart contract)
+- [ ] Stickers design marketplace : allow users to publish their custom design on a marketplace ; this would allow users to regulate how the "terms and conditions" of how their creation could be used outside of Gommette thanks to Universal Data License ; (not implemented yet)
+- [ ] History rewind : replay how the world map evolved (not implemented on the frontend, implemented in the smart contract)
+- [ ] Sticker spawn locations: players will be able submit spawn locations that will spawn random stickers everyday at specific time and locations ; (not implemented yet)
 
 ## Monorepo folder structure
 
