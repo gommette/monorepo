@@ -4,6 +4,12 @@ This repository is a monorepo that contains the source cod of our entry to the [
 - [smart contract deployed to Sonar mainnet](https://sonar.warp.cc/#/app/contract/AktpLi9jA4-CC1elBEXefqHVDzi3LZxYArs6PB6qTPs)
 - Assets manifest ID: `TmxMV7ncy72eNFFoUaS1hlBMdii127hgVCxpgjEjAlo`
 
+A version of the game with a mocked initial state is deployed on [Sonar testnet](https://sonar.warp.cc/#/app/contract/Vy7k8NKiMKpIOOOnnq-hZ_rS9GnFmDM3Q0UAaKoPqkc?network=testnet#current-state) ;
+
+Demo recorded with deployed smart contract `Svr7HFSmETj4Fd5i_ma0mngkFZ1AiIne4hG3kwyOJnc` [Sonar testnet](https://sonar.warp.cc/#/app/contract/Svr7HFSmETj4Fd5i_ma0mngkFZ1AiIne4hG3kwyOJnc?network=testnet)
+
+---
+
 # About
 
 **Gommette** is a geosocial mobile game that encourages players to explore their surroundings and connect with others through **digital stickers**. Each day, users receive a random pack of stickers with messages, which they can pin to specific geolocations. Players can pick up stickers left by others if they are physically present at that location. The game also allows users to create custom designs, contribute to the map with respawn locations, and participate in sponsored quests for unique stickers. Gommette aims to promote local exploration, foster a community-driven experience, and, in the long run, replace generic stickers with user-designed content for an ever-evolving gaming adventure :v:
@@ -78,10 +84,15 @@ To get started locally, make sure to :
 - have an Arweave wallet ; you can create one by using the [Arconnect](https://docs.arconnect.io/) web extension ;
 - export the keyfile of your Arweave wallet ; paste this file in `.apps/warp-contract` and rename it `testnetwallet.json` or `wallet.json` ; **never share this file with anyone !**
 
+
+### REST API (`/apps/rest-api`)
+
+Bridge between the front-end PWA and the smart contract. Built with Hono, its a simple REST API that uses Warp SDK under the hood to perform read/write operations.
+
 ## Instructions
 
+- Start the REST API: `pnpm server:start` ; the API is accessible at `localhost:8080` ;
 - Start and run the PWA: `pnpm dev` (or `npm dev`/`yarn dev`) ; this should print something similar to this in your terminal :
-
 ```
 $ pnpm dev
 

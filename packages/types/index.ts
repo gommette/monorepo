@@ -21,6 +21,8 @@ export interface StickerBoard {
 export interface MappingStickerBoardStickersQuantity {
   [key: string]: number
 }
+
+export type PickupConditionValue = 'FREE' | 'SACRIFICE' | 'EXCHANGE'
 export interface StickerPickUpConditions {
   // conditions types
   // "FREE": no condition
@@ -80,6 +82,7 @@ export interface OverworldMap {
 }
 
 export interface AppState {
+  setter: string
   players: MappingIdPlayer
   stickerBoards: MappingIdStickerBoard
   overworldMap: OverworldMap

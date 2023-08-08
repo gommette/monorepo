@@ -14,6 +14,7 @@ import {
   DialogInventory,
   DialogPickSticker,
   DialogPinSticker,
+  useAuthentication,
   useDictionary,
   useGommette,
 } from '../features'
@@ -39,9 +40,11 @@ const [t] = useDictionary(dictionary)
 export const OverworldMap: Component = () => {
   const [location] = createGeolocation()
   const [viewport, setViewport] = createSignal({} as Viewport)
-  const { mutationPlayerGeolocation } = useGommette()
+  const { storeAuthentication } = useAuthentication()
+  const { mutationUpdatePlayerGeolocation } = useGommette()
+
   createEffect(async () => {
-    if (location()?.latitude && location()?.longitude) {
+    if (location()?.latitude && location()?.longitude && storeAuthentication.walletAddress) {
       const long = location()?.longitude
       const lat = location()?.latitude
 
@@ -51,7 +54,7 @@ export const OverworldMap: Component = () => {
       })
 
       // update current user geolocation in Gommette state
-      await mutationPlayerGeolocation.mutateAsync({ coordinates: [location().longitude, location().latitude] })
+      await mutationUpdatePlayerGeolocation.mutateAsync({ coordinates: [location().longitude, location().latitude] })
     }
   })
 
@@ -178,7 +181,7 @@ const Map = (props: MapProps) => {
                             refDialogPinnedStickerDetails.click()
                           }}
                         >
-                          <img class="w-5" src={uriSticker} />
+                          <img class="w-7" src={uriSticker} />
                         </button>
                       ),
                     }}

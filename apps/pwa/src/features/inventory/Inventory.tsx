@@ -42,22 +42,21 @@ export const Inventory = (props: InventoryProps) => {
       </Match>
       <Match when={queryPlayer?.data?.player?.inventory?.length > 0}>
         <section>
-          <ul class="grid grid-cols-4 gap-3">
-            <For each={queryPlayer?.data?.player?.inventory}>
-              {(sticker) => {
+          <ul class="grid grid-cols-3 sm:grid-cols-4 gap-8">
+            <For each={Object.keys(queryPlayer?.data?.player?.inventoryWithAmount)}>
+              {(board) => {
                 const boards = queryStickerBoards?.data?.stickerBoards
                 return (
-                  <li class="relative">
-                    <img
-                      alt={boards?.[sticker.idStickerBoard]?.name}
-                      class="animate-revolve w-24"
-                      src={resolveUri(boards?.[sticker.idStickerBoard]?.uri)}
-                    />
-                    <Show when={props.setSelectedSticker}>
-                      <button class="absolute z-10 inset-0 w-full h-full opacity-0">
-                        {t.callToAction_SelectStickerToPin_label()}
-                      </button>
-                    </Show>
+                  <li class="relative p-2 text-center">
+                    <div class="h-24">
+                      <img
+                        alt={boards?.[board]?.name}
+                        class="h-full object-contain"
+                        src={`https://arweave.net/${board}`}
+                      />
+                    </div>
+                    <p class="text-sm text-neutral-11">{boards?.[board]?.name}</p>
+                    <p class="text-xs text-metal-11">x{queryPlayer?.data?.player?.inventoryWithAmount[board]}</p>
                   </li>
                 )
               }}
@@ -88,17 +87,17 @@ export const DialogInventory = (props: DialogInventoryProps) => {
               <DialogTitle class="w-full sticky top-0 bg-neutral-2 border-b border-neutral-5 text-primary-neutral-12 pt-1.5 leading-relaxed px-3 font-bold text-lg">
                 {t.dialogTitle_label()}
               </DialogTitle>
-              <div class="w-full flex flex-col py-6 px-3">
-                <Inventory />
-                <Show when={queryPlayer?.data?.player?.inventory?.length === 0}>
-                  <Button
-                    intent="primary-ghost"
-                    class="text-xs w-full mt-6 inline-flex items-center justify-center"
-                    {...state().closeTriggerProps}
-                  >
-                    {t.callToAction_GoBack_label()}
-                  </Button>
-                </Show>
+              <div class="w-full flex flex-col pt-6 pb-9 px-3">
+                <div class="pb-6">
+                  <Inventory />
+                </div>
+                <Button
+                  intent="primary-ghost"
+                  class="text-xs w-full inline-flex items-center justify-center"
+                  {...state().closeTriggerProps}
+                >
+                  {t.callToAction_GoBack_label()}
+                </Button>
               </div>
             </DialogDrawerBody>
           </Portal>

@@ -6,12 +6,14 @@ import { useGommette } from '../gommette'
 import type { Sticker } from '@gommette/types'
 import { type Accessor, Show } from 'solid-js'
 import { resolveUri } from '../../helpers'
+import { createGeolocation } from '@solid-primitives/geolocation'
 
 const dictionary = {
   en: {
-    dialogTrigger_label: 'Pick up',
+    dialogTrigger_label: 'Pick this sticker',
     link_OpenDirectionOnMaps_Label: 'Open directions on Maps',
     details_PinnedBy_text: ({ author }: { author: string }) => `Pinned by ${author}`,
+    callToAction_GoBack_label: 'Back to map',
   },
 }
 
@@ -22,8 +24,8 @@ interface DialogPickStickerProps {
   sticker: Accessor<Sticker>
 }
 export const DialogPickSticker = (props: DialogPickStickerProps) => {
-  const { queryStickerBoards } = useGommette()
-
+  const { queryStickerBoards, mutationPickSticker } = useGommette()
+  const [location] = createGeolocation()
   return (
     <Dialog>
       {(state) => (
@@ -35,7 +37,7 @@ export const DialogPickSticker = (props: DialogPickStickerProps) => {
           <Portal>
             <DialogDrawerBody isOpen={state().isOpen} class="flex flex-col max-h-[90dvh] overflow-y-auto">
               <Show when={props.sticker()?.id}>
-                <div class="w-full pt-6">
+                <div class="w-full py-6">
                   <div class="flex items-center gap-3 flex-col-reverse">
                     <DialogTitle class="text-neutral-11 text-xs">
                       {props.sticker()?.id} -{' '}
@@ -54,8 +56,19 @@ export const DialogPickSticker = (props: DialogPickStickerProps) => {
                     </div>
                   </div>
                   <section class="grid py-3 border-b border-b-neutral-5 px-6 gap-1.5">
-                    <Button class="text-sm inline-flex items-center justify-center">
-                      {t.callToAction_PickPinnedSticker_label()}
+                    <Button
+                      isLoading={mutationPickSticker.isLoading}
+                      disabled={mutationPickSticker.isLoading}
+                      onClick={async () => {
+                        await mutationPickSticker.mutateAsync({
+                          idSticker: props.sticker().id,
+                          coordinates: [location().longitude, location().latitude],
+                          messageText: '',
+                        })
+                      }}
+                      class="text-sm inline-flex items-center justify-center"
+                    >
+                      {t.dialogTrigger_label()}
                     </Button>
                     <a
                       class={callToAction({
@@ -71,13 +84,20 @@ export const DialogPickSticker = (props: DialogPickStickerProps) => {
                     </a>
                   </section>
                   <section class="max-w-prose px-6 pt-3 pb-6 mx-auto">
-                    <p class="text-metal-11 pb-1.5 text-xs text-center">
+                    <p class="text-metal-11 overflow-hidden text-ellipsis pb-1.5 text-xs text-center">
                       {t.details_PinnedBy_text({
                         author: props.sticker().message.author,
                       })}
                     </p>
                     <p class="text-primary-neutral-12 italic">{props.sticker().message.text}</p>
                   </section>
+                  <Button
+                    intent="primary-ghost"
+                    class="text-xs w-full inline-flex items-center justify-center"
+                    {...state().closeTriggerProps}
+                  >
+                    {t.callToAction_GoBack_label()}
+                  </Button>
                 </div>
               </Show>
             </DialogDrawerBody>

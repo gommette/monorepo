@@ -1,11 +1,13 @@
 import { Dialog, DialogTrigger, DialogTitle } from '@ark-ui/solid'
 import { Portal } from 'solid-js/web'
+import { createForm } from '@felte/solid'
 import { Loader, Dialog as DialogDrawerBody, Button, FormTextarea } from '../../components'
 import { useDictionary } from '../internationalization'
 import type { PlayerInventory, Sticker } from '@gommette/types'
-import { createSignal, For, Switch, Match } from 'solid-js'
+import { createSignal, For, Switch, Match, createEffect } from 'solid-js'
 import { useGommette } from '../gommette'
 import { resolveUri } from '../../helpers'
+import { createGeolocation } from '@solid-primitives/geolocation'
 
 const dictionary = {
   en: {
@@ -25,8 +27,25 @@ interface DialogPinStickerProps {
   inventory?: PlayerInventory
 }
 export const DialogPinSticker = (props: DialogPinStickerProps) => {
+  const [location] = createGeolocation()
   const [stickerToPin, setStickerToPin] = createSignal<null | Sticker>(null)
-  const { queryPlayer, queryStickerBoards } = useGommette()
+  const { queryPlayer, queryStickerBoards, mutationPinSticker } = useGommette()
+  const { form, data, setData } = createForm({
+    onSubmit: async (values) => {
+      await mutationPinSticker.mutateAsync({
+        idSticker: values.sticker,
+        messageText: values.message,
+        coordinates: [location().longitude, location().latitude],
+        pickupConditions: {
+          conditionType: 'FREE', // hardcoded for now, running out of time !
+        },
+      })
+    },
+  })
+
+  createEffect(() => {
+    console.log('queryPlayer?.data?.player?.inventory', queryPlayer?.data?.player?.inventory)
+  })
   return (
     <Dialog>
       {(state) => (
@@ -46,7 +65,7 @@ export const DialogPinSticker = (props: DialogPinStickerProps) => {
                   <Match when={queryPlayer?.status === 'loading'}>
                     <Loader isVisible={queryPlayer?.status === 'loading'} />
                   </Match>
-                  <Match when={queryPlayer?.data?.player?.inventory?.length > 0}>
+                  <Match when={queryPlayer?.data?.player?.inventory?.length === 0}>
                     <section class="py-3 px-6 rounded bg-primary-neutral-3 border border-primary-neutral-6 text-primary-neutral-11">
                       <p>{t.paragraph_EmptyInventory_text()}</p>
                     </section>
@@ -59,28 +78,18 @@ export const DialogPinSticker = (props: DialogPinStickerProps) => {
                       {t.callToAction_GoBack_label()}
                     </Button>
                   </Match>
-                  <Match when={queryPlayer?.data?.player?.inventory?.length === 0}>
-                    <form
-                      onSubmit={(e) => {
-                        e.preventDefault()
-                        const data = {
-                          //@ts-ignore
-                          idSticker: e.target?.elements?.sticker?.value,
-                          //@ts-ignore
-                          message: e.target?.elements?.message?.value,
-                        }
-                      }}
-                      class="gap-6 flex flex-col"
-                    >
+                  <Match when={queryPlayer?.data?.player?.inventory?.length > 0}>
+                    {/* @ts-ignore */}
+                    <form use:form class="gap-6 flex flex-col">
                       <fieldset>
-                        <legend class="text-sm text-metal-11">{t.form_PickSticker_label()}</legend>
+                        <legend class="pb-3 text-sm text-metal-11">{t.form_PickSticker_label()}</legend>
 
-                        <div class="grid grid-cols-4 gap-3">
+                        <div class="grid grid-cols-3 sm:grid-cols-4 gap-8">
                           <For each={queryPlayer?.data?.player?.inventory}>
                             {(sticker) => {
                               const boards = queryStickerBoards?.data?.stickerBoards
                               return (
-                                <div class="relative">
+                                <div class="relative h-24 p-2 rounded  [&:has(:checked)]:bg-complementary-3 [&:has(:checked)]:ring-4 ring-complementary-7">
                                   <input
                                     class="absolute z-10 opacity-0 block inset-0 w-full h-full"
                                     type="radio"
@@ -89,7 +98,7 @@ export const DialogPinSticker = (props: DialogPinStickerProps) => {
                                   />
                                   <img
                                     alt={boards?.[sticker.idStickerBoard]?.name}
-                                    class="animate-revolve w-24"
+                                    class="h-full object-contain"
                                     src={resolveUri(boards?.[sticker.idStickerBoard]?.uri)}
                                   />
                                 </div>
@@ -106,7 +115,13 @@ export const DialogPinSticker = (props: DialogPinStickerProps) => {
                           <FormTextarea hasError={false} class="w-full" name="message" />
                         </div>
                       </fieldset>
-                      <Button class="w-full inline-flex justify-center items-center">{t.callToAction_label()}</Button>
+                      <Button
+                        isLoading={mutationPinSticker.isLoading}
+                        disabled={mutationPinSticker.isLoading}
+                        class="w-full inline-flex justify-center items-center"
+                      >
+                        {t.callToAction_label()}
+                      </Button>
                     </form>
                   </Match>
                 </Switch>

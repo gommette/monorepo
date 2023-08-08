@@ -4,7 +4,6 @@ import { TbSticker } from 'solid-icons/tb'
 import { Loader, Dialog as DialogDrawerBody, Button, FormInput } from '../../components'
 import { useDictionary } from '../internationalization'
 import { createForm } from '@felte/solid'
-import { createEffect } from 'solid-js'
 import { createMutation } from '@tanstack/solid-query'
 
 const dictionary = {

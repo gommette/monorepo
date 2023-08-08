@@ -11,6 +11,7 @@ export type LoadGameFunction = 'loadGame'
 export interface LoadGameInput {
   function: 'loadGame'
   coordinates: Coordinates
+  idPlayer: string
 }
 export interface LoadGameAction {
   input: LoadGameInput
@@ -23,16 +24,16 @@ export interface LoadGameResult {
 }
 
 /**
- * Get current player (caller)'s inventory, along with the current map and the sticker boards
+ * Get current player's inventory, along with the current map and the sticker boards
  */
 export async function loadGame(
   state: GommetteState,
-  { input: { coordinates }, caller }: LoadGameAction,
+  { input: { coordinates, idPlayer } }: LoadGameAction,
 ): Promise<ContractResult> {
-  const player: Player = state.players[caller]
-    ? state.players[caller]
+  const player: Player = state.players[idPlayer]
+    ? state.players[idPlayer]
     : {
-        id: caller,
+        id: idPlayer,
         coordinates,
         inventory: [],
         creations: [],

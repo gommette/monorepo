@@ -7,7 +7,6 @@ export interface GetPlayerInventoryInput {
 }
 export interface GetPlayerInventoryAction {
   input: GetPlayerInventoryInput
-  caller: string
 }
 export type GetPlayerInventoryResult = {
   inventory: PlayerInventory
@@ -18,14 +17,19 @@ export type GetPlayerInventoryResult = {
  */
 export async function getPlayerInventory(
   state: GommetteState,
-  { input: { idPlayer }, caller }: GetPlayerInventoryAction,
+  { input: { idPlayer } }: GetPlayerInventoryAction,
 ): Promise<ContractResult> {
   let player: Player
+  /*
+  The following code is removed for now ; a single wallet calls the smart contract on behalf of users
   if (idPlayer) {
     player = state.players[idPlayer]
   } else {
     player = state.players[caller]
   }
+  */
+
+  player = state.players[idPlayer]
   const inventory = player?.inventory ?? []
 
   return {

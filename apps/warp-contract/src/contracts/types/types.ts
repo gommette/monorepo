@@ -31,7 +31,7 @@ import type {
   UpdateCurrentGeolocationFunction,
   UpdateCurrentGeolocationAction,
 } from '../actions'
-import { MappingIdPlayer, MappingIdStickerBoard, OverworldMap, StickerBoard, AppState } from '@gommette/types'
+import type { StickerBoard, AppState } from '@gommette/types'
 
 export type GommetteState = AppState
 

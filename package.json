@@ -4,6 +4,7 @@
   "description": "Monorepo for Gommette, a geosocial mobile game that encourages players to explore their surroundings and connect with others through digital stickers",
   "scripts": {
     "dev": "cd apps/pwa && pnpm dev",
+    "server:start": "cd apps/rest-api && pnpm start",
     "format": "prettier --write \"**/*.{ts,tsx,md,js,jsx,css}\""
   },
   "keywords": [
