@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "@ark-ui/solid": "^0.8.1",
+    "@felte/solid": "^1.2.10",
     "@solid-primitives/geolocation": "^1.4.10",
     "@solid-primitives/i18n": "^1.4.0",
     "@solid-primitives/mutation-observer": "^1.1.13",

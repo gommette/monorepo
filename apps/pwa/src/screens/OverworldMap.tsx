@@ -7,6 +7,7 @@ import type { Accessor, Setter, Component, Resource } from 'solid-js'
 import { BiRegularNotification } from 'solid-icons/bi'
 import { IoGridOutline } from 'solid-icons/io'
 import { AiOutlinePushpin } from 'solid-icons/ai'
+import { HiOutlinePaintBrush } from 'solid-icons/hi'
 import { Loader } from '../components'
 import {
   DialogClaimDailyDrop,
@@ -18,12 +19,14 @@ import {
 } from '../features'
 import { resolveUri } from '../helpers'
 import type { Sticker } from '@gommette/types'
+import { DialogCreateDesign } from '../features/create-design'
 
 const dictionary = {
   en: {
     dialogTrigger_ClaimDailyDrop_label: 'Daily drop',
     dialogTrigger_Inventory_label: 'My inventory',
     dialogTrigger_PinSticker_label: 'Pin',
+    dialogTrigger_CreateDesign_label: 'Create design',
   },
 }
 const [t] = useDictionary(dictionary)
@@ -79,6 +82,7 @@ interface MapProps {
 const Map = (props: MapProps) => {
   let refMapboxWrapper
   let refDialogPinSticker
+  let refDialogCreateDesign
   let refDialogInventory
   let refDialogPinnedStickerDetails
   let refDialogClaimDailyDrop
@@ -111,7 +115,7 @@ const Map = (props: MapProps) => {
   return (
     <>
       <div class="z-10 fixed border border-neutral-6 inset-0 flex items-end justify-center pb-12 pointer-events-none w-full">
-        <div class="bg-neutral-1 pointer-events-auto grid grid-cols-3 gap-8 shadow-xl rounded-xl px-3 pb-0.25  pt-1.5">
+        <div class="bg-neutral-1 pointer-events-auto grid grid-cols-4 gap-6 shadow-xl rounded-xl px-3 pb-0.25  pt-1.5">
           <button
             onClick={() => refDialogInventory.click()}
             class="flex flex-col leading-loose items-center justify-center aspect-square"
@@ -132,6 +136,13 @@ const Map = (props: MapProps) => {
           >
             <BiRegularNotification size={24} />
             <span class="text-2xs text-neutral-11">{t.dialogTrigger_ClaimDailyDrop_label()}</span>
+          </button>
+          <button
+            class="flex flex-col leading-loose items-center justify-center aspect-square"
+            onClick={() => refDialogCreateDesign.click()}
+          >
+            <HiOutlinePaintBrush size={24} />
+            <span class="text-2xs text-neutral-11">{t.dialogTrigger_CreateDesign_label()}</span>
           </button>
         </div>
       </div>
@@ -194,6 +205,7 @@ const Map = (props: MapProps) => {
       <DialogInventory ref={refDialogInventory} />
       <DialogPinSticker ref={refDialogPinSticker} />
       <DialogClaimDailyDrop ref={refDialogClaimDailyDrop} />
+      <DialogCreateDesign ref={refDialogCreateDesign} />
     </>
   )
 }

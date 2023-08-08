@@ -1,4 +1,5 @@
 export * from './Button'
 export * from './Dialog'
+export * from './FormInput'
 export * from './FormTextarea'
 export * from './Loader'
